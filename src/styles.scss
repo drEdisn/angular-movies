@@ -1,0 +1,23 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./app/styles/variables.scss";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+select {
+	appearance: none;
+  outline: none;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+}

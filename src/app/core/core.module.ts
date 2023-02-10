@@ -1,16 +1,9 @@
-import { NgModule } from "@angular/core";
-import { SharedModule } from "../shared/shared.module";
-import { HeaderComponent } from "./components/header/header.component";
+import { ApiService } from './services/api.service';
+import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-  ],
-  imports: [
-    SharedModule,
-  ],
-  exports: [
-    HeaderComponent,
+  providers: [
+    ApiService,
   ]
 })
 export class CoreModule {}

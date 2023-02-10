@@ -1,0 +1,12 @@
+<div class="movie">
+  <div class="image-content">
+    <img src="./assets/images/empty-movie-icon.png" alt="image" class="movie__image">
+    <div class="rating">{{ movieItem.vote_average }}</div>
+  </div>
+  <p class="movie__title">{{ movieItem.title }}</p>
+  <div class="movie__genres">
+    <span class="genre" *ngFor="let genre of movieItem.genre_ids">
+
+    </span>
+  </div>
+</div>

@@ -7,15 +7,17 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
-  selected: string = 'en'
   searchForm = this.fb.group({
     searchValue: [''],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  search() {
+  search() {}
 
+  resetMargin() {
+    return {
+      marginBottom: '-1.25rem',
+    };
   }
 }

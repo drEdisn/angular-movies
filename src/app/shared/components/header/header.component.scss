@@ -1,0 +1,109 @@
+.header {
+  color: var(--white);
+  background-color: var(--dark-6);
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+  }
+
+  &__title {
+    font-size: 2rem;
+    letter-spacing: 0.3rem;
+    line-height: 2.4rem;
+    font-weight: 700;
+  }
+
+  &__search-form {
+    width: 60%;
+  }
+
+  &__lang {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 50px;
+    height: 40px;
+    justify-content: center;
+    background-color: inherit;
+    border: 1px solid white;
+    border-radius: 2px;
+    &:hover .header__lang-change {
+      display: flex;
+    }
+  }
+
+  &__lang-select {
+    width: 100%;
+    font-size: 1rem;
+    text-align: center;
+    user-select: none;
+  }
+
+  &__lang-change {
+    position: absolute;
+    transform: translate(-25%, 90%);
+    display: none;
+    width: 100px;
+    flex-direction: column;
+    border: 1px solid var(--black);
+    &:hover {
+      display: flex;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      width: 100%;
+      height: 15px;
+      transform: translateX(-50%);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      transform: translateX(-50%) rotate(45deg);
+      background-color: var(--white);
+    }
+  }
+
+  &__lang-option {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 20;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    color: var(--black);
+    transition: 0.3s;
+
+    &:hover {
+      background-color: rgb(202, 202, 202);
+    }
+  }
+}
+
+.field {
+  max-width: 900px;
+  min-width: 100px;
+  width: 100%;
+  color: var(--black);
+}

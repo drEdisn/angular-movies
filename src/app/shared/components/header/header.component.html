@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="container header__container">
+    <h1 class="header__title">
+      {{ 'title' | translate }}
+    </h1>
+    <form
+      class="header__search-form"
+      [formGroup]="searchForm"
+      (ngSubmit)="search()"
+    >
+      <mat-form-field class="field" [ngStyle]="resetMargin()">
+        <input matInput [placeholder]="'placeholder' | translate" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <div class="header__lang">
+      <div class="header__lang-select">EN</div>
+      <div class="header__lang-change">
+        <div class="header__lang-option" data-value="en">EN</div>
+        <div class="header__lang-option" data-value="ru">RU</div>
+      </div>
+    </div>
+  </div>
+</header>

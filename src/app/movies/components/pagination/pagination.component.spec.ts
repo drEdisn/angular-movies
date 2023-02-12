@@ -1,3 +1,4 @@
+import { PaginationService } from './../../services/pagination.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';
@@ -8,9 +9,9 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
-    })
-    .compileComponents();
+      declarations: [PaginationComponent],
+      providers: [PaginationService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;

@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint",
-    "prettier": "npx prettier --write ."
+    "prettier": "npx prettier --write ./src"
   },
   "private": true,
   "dependencies": {

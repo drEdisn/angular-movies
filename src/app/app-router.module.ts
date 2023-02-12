@@ -5,8 +5,9 @@ const ROUTES: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
   {
     path: 'movies',
-    loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule),
-  }
+    loadChildren: () =>
+      import('./movies/movies.module').then((m) => m.MoviesModule),
+  },
 ];
 
 @NgModule({

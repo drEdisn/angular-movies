@@ -15,6 +15,7 @@
   }
 
   &__title {
+    user-select: none;
     font-size: 2rem;
     letter-spacing: 0.3rem;
     line-height: 2.4rem;
@@ -34,7 +35,7 @@
     height: 40px;
     justify-content: center;
     background-color: inherit;
-    border: 1px solid white;
+    border: 1px solid var(--white);
     border-radius: 2px;
     &:hover .header__lang-change {
       display: flex;
@@ -96,7 +97,7 @@
     transition: 0.3s;
 
     &:hover {
-      background-color: rgb(202, 202, 202);
+      background-color: var(--dark-3);
     }
   }
 }

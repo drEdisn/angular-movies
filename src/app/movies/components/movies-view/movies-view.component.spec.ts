@@ -1,4 +1,9 @@
+import { PaginationComponent } from './../pagination/pagination.component';
+import { ApiService } from './../../../shared/services/api.service';
+import { PaginationService } from './../../services/pagination.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MoviesService } from '../../services/movies.service';
 
 import { MoviesViewComponent } from './movies-view.component';
 
@@ -8,7 +13,14 @@ describe('MoviesViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MoviesViewComponent],
+      providers: [
+        HttpClient,
+        HttpHandler,
+        MoviesService,
+        PaginationService,
+        ApiService,
+      ],
+      declarations: [MoviesViewComponent, PaginationComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MoviesViewComponent);

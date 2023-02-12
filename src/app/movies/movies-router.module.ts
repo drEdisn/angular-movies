@@ -7,7 +7,7 @@ const ROUTES: Routes = [
     path: '',
     component: MoviesViewComponent,
   },
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(ROUTES)],

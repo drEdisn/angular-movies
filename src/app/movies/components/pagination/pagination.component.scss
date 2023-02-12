@@ -1,0 +1,22 @@
+.pagination {
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+
+  &__page {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.25rem;
+    background-color: var(--green-3);
+    border: 3px solid var(--dark-5);
+
+    &:hover {
+      background-color: inherit;
+      border: 3px solid var(--green-3);
+    }
+  }
+}

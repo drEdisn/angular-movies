@@ -16,6 +16,11 @@
   transition: 0.3s;
 }
 
+body {
+  background-color: var(--dark-5);
+  color: var(--white);
+}
+
 select {
   appearance: none;
   outline: none;

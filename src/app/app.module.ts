@@ -1,4 +1,8 @@
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -7,10 +11,9 @@ import { AppRouterModule } from './app-router.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { InterceptorService } from './core/services/interceptor.service';
+import { ApiInterceptorService } from './shared/services/api-interceptor.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +26,6 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
-    CoreModule,
     RouterModule,
     AppRouterModule,
     TranslateModule.forRoot({
@@ -38,7 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
+      useClass: ApiInterceptorService,
       multi: true,
     },
   ],

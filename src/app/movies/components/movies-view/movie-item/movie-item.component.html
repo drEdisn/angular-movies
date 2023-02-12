@@ -1,12 +1,16 @@
-<div class="movie">
+<div class="movie" *ngIf="movieItem !== undefined">
   <div class="image-content">
-    <img src="./assets/images/empty-movie-icon.png" alt="image" class="movie__image">
-    <div class="rating">{{ movieItem.vote_average }}</div>
+    <img [src]="getImage()" alt="image" class="movie__image" />
+    <div class="rating">
+      {{ movieItem.vote_average | number : '0.0-1' }}
+    </div>
   </div>
-  <p class="movie__title">{{ movieItem.title }}</p>
+  <p class="movie__title">
+    {{ movieItem.title }}
+  </p>
   <div class="movie__genres">
-    <span class="genre" *ngFor="let genre of movieItem.genre_ids">
-
+    <span class="genre" *ngFor="let genre of genres | async">
+      {{ genre.name }}
     </span>
   </div>
 </div>

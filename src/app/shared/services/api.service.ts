@@ -1,6 +1,6 @@
-import { Genres } from '../../movies/models/genres.model';
-import { MoviesSearchResult } from '../../movies/models/search-result.model';
-import { Api } from '../../movies/enums/api.enum';
+import { Genres } from '../../main/models/genres.model';
+import { MoviesSearchResult } from '../../main/models/search-result.model';
+import { Api } from '../../main/enums/api.enum';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 

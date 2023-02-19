@@ -6,7 +6,7 @@ import {
   HttpHandler,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Api } from 'src/app/movies/enums/api.enum';
+import { Api } from 'src/app/main/enums/api.enum';
 
 @Injectable({
   providedIn: 'root',

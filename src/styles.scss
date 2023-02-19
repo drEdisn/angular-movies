@@ -1,5 +1,5 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
 @import './app/styles/variables.scss';
 
 *,
@@ -13,7 +13,6 @@
   border: 0;
   list-style: none;
   text-decoration: none;
-  transition: 0.3s;
 }
 
 body {
@@ -29,4 +28,34 @@ select {
 .container {
   margin: 0 auto;
   max-width: 1440px;
+}
+
+.rating {
+  position: absolute;
+  top: 1rem;
+  width: 40px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  font-weight: 600;
+  color: var(--white);
+  transform: translateX(-25%);
+  border-radius: 10%;
+  background-color: var(--green-2);
+}
+
+.genre {
+  font-size: 0.8rem;
+  background-color: whitesmoke;
+  color: var(--black);
+  margin: 0 0.1rem;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.1rem 0.3rem;
+}
+
+.page-content {
+  display: flex;
+  gap: 1.5rem;
+  margin: 20px 10%;
 }

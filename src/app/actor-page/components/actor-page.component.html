@@ -1,13 +1,21 @@
 <div class="actor-page container">
   <div class="page-content">
-    <div class="movie__about">
+    <img src="assets/images/person-icon.png" alt="actor" class="actor__image" />
+    <div class="actor__about">
+      <h4 class="actor__title">Actor Name</h4>
       <div class="subcontent">
-        <span class="seciton-name">Title:</span>
-        <h4 class="movie__title">Movie Title</h4>
+        <span class="seciton-name">Birthday:</span>
+        <div class="actor__birthday">
+          {{ '1995-05-26' | date : 'MMMM d, y' }}
+        </div>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Overview:</span>
-        <p class="movie__overview">
+        <span class="seciton-name">Place of bitrh:</span>
+        <div class="actor__place">Paddington, London, England</div>
+      </div>
+      <div class="subcontent">
+        <span class="seciton-name">Biography:</span>
+        <p class="actor__biography">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,
           amet eveniet. Culpa expedita consequatur voluptate repellendus optio
           minima voluptatum ullam inventore, asperiores, distinctio quaerat
@@ -24,138 +32,45 @@
           architecto vitae nemo! At sint eligendi odit! Quas, laborum!
         </p>
       </div>
-      <div class="subcontent">
-        <span class="seciton-name">Release date:</span>
-        <div class="movie__date">
-          {{ '2021-05-26' | date : 'MMMM d, y' }}
-        </div>
-      </div>
-      <div class="subcontent">
-        <span class="seciton-name">Revenue:</span>
-        <div class="movie__revenue">
-          {{ 42600000 | currency : 'CAD' : 'symbol-narrow' : '1.0-0' }}
-        </div>
-      </div>
-      <div class="subcontent">
-        <span class="seciton-name">Duration:</span>
-        <div class="movie__duration">
-          {{ '2.14' | number : '1.0-2' }}
-        </div>
-      </div>
-      <div class="movie__genres">
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-      </div>
-      <div class="movie__actors">
-        <div class="actors__head">
-          <span class="movie__subtitle">Top Billed Cast</span>
-          <button mat-stroked-button class="actors__show-button">
-            Show all
-          </button>
-        </div>
-        <div class="actors__cards">
-    
-        </div>
-      </div>
-      <div class="movie__images">
-        <span class="movie__subtitle">Images</span>
+      <div class="subcontent actor__images">
+        <span class="actor__subtitle">Photos</span>
         <div class="images__block">
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
+          <img
+            src="assets/images/person-icon.png"
+            alt="actor"
+            class="images__item"
+          />
+          <img
+            src="assets/images/person-icon.png"
+            alt="actor"
+            class="images__item"
+          />
+          <img
+            src="assets/images/person-icon.png"
+            alt="actor"
+            class="images__item"
+          />
+          <img
+            src="assets/images/person-icon.png"
+            alt="actor"
+            class="images__item"
+          />
+          <img
+            src="assets/images/person-icon.png"
+            alt="actor"
+            class="images__item"
+          />
         </div>
       </div>
+    </div>
+  </div>
+  <div class="page-movie page-content actor__movies">
+    <span class="actor__subtitle page-movie__title">KNOWN BY</span>
+    <div class="page-movie__content">
+      <app-movie-item
+        *ngFor="let movie of movieArray"
+        [movieItem]="movie"
+      ></app-movie-item>
     </div>
   </div>
 </div>

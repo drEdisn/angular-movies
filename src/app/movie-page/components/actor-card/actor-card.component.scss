@@ -1,10 +1,17 @@
 .actor {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   gap: 0.5rem;
   height: 100%;
+  transition: var(--delay);
+  padding: 0.5rem;
+
+  &:hover {
+    background-color: var(--dark-6);
+  }
 
   &__image {
     width: 100%;

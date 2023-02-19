@@ -6,8 +6,8 @@ const ROUTES: Routes = [
   {
     path: '',
     component: ActorPageComponent,
-  }
-]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(ROUTES)],

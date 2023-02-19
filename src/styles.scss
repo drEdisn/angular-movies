@@ -59,3 +59,36 @@ select {
   gap: 1.5rem;
   margin: 20px 10%;
 }
+
+.subcontent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: start;
+  justify-content: center;
+}
+
+.seciton-name {
+  font-size: 0.8rem;
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+}
+
+.page-movie {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

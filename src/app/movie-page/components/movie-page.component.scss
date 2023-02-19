@@ -12,6 +12,7 @@
     width: 250px;
     height: 350px;
     object-fit: contain;
+    border-radius: 5px;
   }
 
   &__about {
@@ -64,10 +65,9 @@
 .actors {
   &__cards {
     display: flex;
-    justify-content: space-between;
     height: 240px;
     width: 100%;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   &__head {
@@ -111,34 +111,4 @@
   height: 25px;
   color: var(--white);
   background-color: var(--green-3);
-}
-
-.subcontent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  align-items: start;
-  justify-content: center;
-}
-
-.seciton-name {
-  font-size: 0.8rem;
-  line-height: 1rem;
-  letter-spacing: 0.1rem;
-  font-weight: 500;
-}
-
-.recomends {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  &__title {
-    font-weight: 500;
-  }
-
-  &__content {
-    display: flex;
-    gap: 1rem;
-  }
 }

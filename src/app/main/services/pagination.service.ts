@@ -1,20 +1,7 @@
+import { Pages } from './../models/pagination.model';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-
-interface Pages {
-  maxPage: number;
-  minPage: number;
-}
-
-enum PaginationConst {
-  min = 1,
-  two,
-  three,
-  four,
-  quantityPages = 5,
-  premax = 497,
-  max = 500,
-}
+import { PaginationConst } from '../enums/pagination.enum';
 
 @Injectable({
   providedIn: 'root',

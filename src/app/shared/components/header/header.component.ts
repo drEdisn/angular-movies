@@ -13,8 +13,6 @@ export class HeaderComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  search() {}
-
   resetMargin() {
     return {
       marginBottom: '-1.25rem',

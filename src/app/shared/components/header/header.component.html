@@ -6,7 +6,6 @@
     <form
       class="header__search-form"
       [formGroup]="searchForm"
-      (ngSubmit)="search()"
     >
       <mat-form-field class="field" [ngStyle]="resetMargin()">
         <input matInput [placeholder]="'placeholder' | translate" />

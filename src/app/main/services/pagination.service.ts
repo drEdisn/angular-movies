@@ -28,11 +28,11 @@ export class PaginationService {
     }
 
     this.pages.next(pages);
-    this.currentPage.next(page);
+    this.currentPage.next(page || PaginationConst.min);
   }
 
   setTotalPages(value: number) {
-    if (this.totalPages < value) {
+    if (this.totalPages > value) {
       this.totalPages = value;
     }
   }

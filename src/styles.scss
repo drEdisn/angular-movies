@@ -46,7 +46,7 @@ select {
 
 .genre {
   font-size: 0.8rem;
-  background-color: whitesmoke;
+  background-color: var(--white-1);
   color: var(--black);
   margin: 0 0.1rem;
   text-align: center;
@@ -64,7 +64,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 }
 

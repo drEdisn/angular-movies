@@ -21,7 +21,7 @@ export class MovieItemComponent implements OnInit {
     this.setGeners();
   }
 
-  setGeners() {
+  private setGeners() {
     const genres = this.moviesService.genres.filter((genre) =>
       this.movieItem.genre_ids.includes(genre.id),
     );

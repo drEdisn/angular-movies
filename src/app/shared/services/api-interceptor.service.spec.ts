@@ -18,17 +18,17 @@ describe('ApiInterceptorService', () => {
         return Observable.create((subscriber: Subscriber<number>) => {
           subscriber.complete();
         });
-      }
+      },
     };
-    
+
     const requestMock = new HttpRequest('GET', '/test');
-    
+
     service.intercept(requestMock, next).subscribe(() => {
       expect(requestMock.url).toEqual(`${Api.url}/test`);
     });
 
     const requestMock2 = new HttpRequest('GET', './assets');
-    
+
     service.intercept(requestMock2, next).subscribe(() => {
       expect(requestMock2.url).toEqual('./assets');
     });

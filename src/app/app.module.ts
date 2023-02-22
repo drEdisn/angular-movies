@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ApiInterceptorService } from './shared/services/api-interceptor.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: ApiInterceptorService,
       multi: true,
     },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })

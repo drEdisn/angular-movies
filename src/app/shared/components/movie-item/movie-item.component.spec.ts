@@ -19,9 +19,8 @@ describe('MovieItemComponent', () => {
     component = fixture.componentInstance;
     service = TestBed.get(MoviesService);
     fixture.detectChanges();
-
   });
-  
+
   it('should create', () => {
     const image = spyOn(component, 'getImage');
     const init = spyOn(component, 'ngOnInit');
@@ -35,11 +34,11 @@ describe('MovieItemComponent', () => {
   });
 
   it('check properties', () => {
-    service.genres = [{name: '123', id: 28}];
+    service.genres = [{ name: '123', id: 28 }];
     component.movieItem = movieArray[0];
     component.ngOnInit();
     component.genres.subscribe((genres) => {
       expect(genres.length).toBe(1);
-    })
+    });
   });
 });

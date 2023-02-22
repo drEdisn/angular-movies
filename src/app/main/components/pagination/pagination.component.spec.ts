@@ -24,16 +24,19 @@ describe('PaginationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
   it('current page check', () => {
-    component.currentPage$.subscribe(page => {
-      expect(page).toEqual(1);
-    }).unsubscribe();
+    component.currentPage$
+      .subscribe((page) => {
+        expect(page).toEqual(1);
+      })
+      .unsubscribe();
 
     service.setPages(6);
 
-    component.currentPage$.subscribe(page => {
-      expect(page).toEqual(6);
-    }).unsubscribe();
+    component.currentPage$
+      .subscribe((page) => {
+        expect(page).toEqual(6);
+      })
+      .unsubscribe();
   });
 });

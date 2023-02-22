@@ -3,10 +3,7 @@
     <h1 class="header__title">
       {{ 'title' | translate }}
     </h1>
-    <form
-      class="header__search-form"
-      [formGroup]="searchForm"
-    >
+    <form class="header__search-form" [formGroup]="searchForm">
       <mat-form-field class="field" [ngStyle]="resetMargin()">
         <input matInput [placeholder]="'placeholder' | translate" />
         <mat-icon matSuffix>search</mat-icon>

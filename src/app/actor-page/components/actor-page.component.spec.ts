@@ -10,7 +10,7 @@ describe('ActorPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ActorPageComponent],
-      imports: [SharedModule]
+      imports: [SharedModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ActorPageComponent);

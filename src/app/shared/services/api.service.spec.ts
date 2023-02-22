@@ -9,7 +9,7 @@ describe('ApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     });
     service = TestBed.inject(ApiService);
   });
@@ -20,20 +20,28 @@ describe('ApiService', () => {
 
   it('check genres', () => {
     const genres = spyOn(service, 'getGanres').and.callFake(() => {
-      return of({genres: [{
-          name: '11',
-          id: 12,
-      }]});
+      return of({
+        genres: [
+          {
+            name: '11',
+            id: 12,
+          },
+        ],
+      });
     });
 
-    service.getGanres().subscribe(genre => {
-      expect(genre).toEqual({genres: [{
-        name: '11',
-        id: 12,
-      }]});
+    service.getGanres().subscribe((genre) => {
+      expect(genre).toEqual({
+        genres: [
+          {
+            name: '11',
+            id: 12,
+          },
+        ],
+      });
     });
     expect(genres).toHaveBeenCalled();
-  })
+  });
 
   it('check popular', () => {
     const movies = spyOn(service, 'requestPopularMovie').and.callFake(() => {
@@ -45,7 +53,7 @@ describe('ApiService', () => {
       });
     });
 
-    service.requestPopularMovie().subscribe(movie => {
+    service.requestPopularMovie().subscribe((movie) => {
       expect(movie).toEqual({
         page: 1,
         results: movieArray,
@@ -54,5 +62,5 @@ describe('ApiService', () => {
       });
     });
     expect(movies).toHaveBeenCalled();
-  })
+  });
 });

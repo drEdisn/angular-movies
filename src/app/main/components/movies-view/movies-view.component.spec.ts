@@ -44,10 +44,14 @@ describe('MoviesViewComponent', () => {
     apiService = TestBed.inject(ApiService);
 
     const genres = spyOn(apiService, 'getGanres').and.callFake(() => {
-      return of({genres: [{
-          name: '11',
-          id: 12,
-      }]});
+      return of({
+        genres: [
+          {
+            name: '11',
+            id: 12,
+          },
+        ],
+      });
     });
 
     const movies = spyOn(apiService, 'requestPopularMovie').and.callFake(() => {
@@ -63,9 +67,9 @@ describe('MoviesViewComponent', () => {
     expect(genres).toHaveBeenCalled();
     expect(movies).toHaveBeenCalled();
 
-    component.movies.subscribe(movie => {
+    component.movies.subscribe((movie) => {
       expect(movie).toEqual(movieArray);
-    })
+    });
   });
 
   it('check sercions', () => {
@@ -74,6 +78,6 @@ describe('MoviesViewComponent', () => {
 
     elem.forEach((obj, ind) => {
       expect(obj.nativeElement.innerText).toEqual(sections[ind]);
-    })
-  })
+    });
+  });
 });

@@ -11,7 +11,7 @@ describe('MoviePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MoviePageComponent, ActorCardComponent],
-      imports: [SharedModule]
+      imports: [SharedModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MoviePageComponent);

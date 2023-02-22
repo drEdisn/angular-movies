@@ -1,7 +1,16 @@
+import { Observable } from 'rxjs';
 import { PaginationService } from './../../services/pagination.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';
+
+const chechCurrent = (current: Observable<number>, expectValue: number) => {
+  current
+    .subscribe((page) => {
+      expect(page).toEqual(expectValue);
+    })
+    .unsubscribe();
+};
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -25,18 +34,9 @@ describe('PaginationComponent', () => {
   });
 
   it('current page check', () => {
-    component.currentPage$
-      .subscribe((page) => {
-        expect(page).toEqual(1);
-      })
-      .unsubscribe();
+    chechCurrent(component.currentPage$, 1);
 
     service.setPages(6);
-
-    component.currentPage$
-      .subscribe((page) => {
-        expect(page).toEqual(6);
-      })
-      .unsubscribe();
+    chechCurrent(component.currentPage$, 6);
   });
 });

@@ -9,6 +9,7 @@
       <app-movie-item
         *ngFor="let movie of movies | async"
         [movieItem]="movie"
+        [routerLink]="['/movies', movie.id]"
       ></app-movie-item>
     </div>
     <app-pagination></app-pagination>

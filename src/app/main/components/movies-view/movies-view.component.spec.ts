@@ -1,3 +1,4 @@
+import { testMovies, testGenres } from './../../../../assets/testData';
 import { By } from '@angular/platform-browser';
 import { movieArray } from './../../../../assets/movieArray';
 import { of } from 'rxjs';
@@ -44,23 +45,11 @@ describe('MoviesViewComponent', () => {
     apiService = TestBed.inject(ApiService);
 
     const genres = spyOn(apiService, 'getGanres').and.callFake(() => {
-      return of({
-        genres: [
-          {
-            name: '11',
-            id: 12,
-          },
-        ],
-      });
+      return of(testGenres);
     });
 
     const movies = spyOn(apiService, 'requestPopularMovie').and.callFake(() => {
-      return of({
-        page: 1,
-        results: movieArray,
-        total_results: 1000,
-        total_pages: 200,
-      });
+      return of(testMovies);
     });
 
     component.ngOnInit();

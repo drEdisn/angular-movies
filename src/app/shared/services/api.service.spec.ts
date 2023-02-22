@@ -1,4 +1,4 @@
-import { movieArray } from './../../../assets/movieArray';
+import { testMovies, testGenres } from './../../../assets/testData';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { TestBed } from '@angular/core/testing';
@@ -20,46 +20,22 @@ describe('ApiService', () => {
 
   it('check genres', () => {
     const genres = spyOn(service, 'getGanres').and.callFake(() => {
-      return of({
-        genres: [
-          {
-            name: '11',
-            id: 12,
-          },
-        ],
-      });
+      return of(testGenres);
     });
 
     service.getGanres().subscribe((genre) => {
-      expect(genre).toEqual({
-        genres: [
-          {
-            name: '11',
-            id: 12,
-          },
-        ],
-      });
+      expect(genre).toEqual(testGenres);
     });
     expect(genres).toHaveBeenCalled();
   });
 
   it('check popular', () => {
     const movies = spyOn(service, 'requestPopularMovie').and.callFake(() => {
-      return of({
-        page: 1,
-        results: movieArray,
-        total_results: 1000,
-        total_pages: 200,
-      });
+      return of(testMovies);
     });
 
     service.requestPopularMovie().subscribe((movie) => {
-      expect(movie).toEqual({
-        page: 1,
-        results: movieArray,
-        total_results: 1000,
-        total_pages: 200,
-      });
+      expect(movie).toEqual(testMovies);
     });
     expect(movies).toHaveBeenCalled();
   });

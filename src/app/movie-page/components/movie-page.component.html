@@ -2,62 +2,47 @@
   <div class="page-content">
     <div class="movie__image-content">
       <img
-        src="./../../../../assets/images/empty-movie-icon.png"
-        alt=""
+        [src]="getImageUrl(movie.poster_path)"
+        [alt]="movie.title"
         class="movie__image"
       />
       <div class="rating">
-        {{ '7.7' | number : '0.0-1' }}
+        {{ movie.vote_average | number : '0.0-1' }}
       </div>
     </div>
     <div class="movie__about">
       <div class="subcontent">
         <span class="seciton-name">Title:</span>
-        <h4 class="movie__title">Movie Title</h4>
+        <h4 class="movie__title">{{ movie.title }}</h4>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Overview:</span>
         <p class="movie__overview">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,
-          amet eveniet. Culpa expedita consequatur voluptate repellendus optio
-          minima voluptatum ullam inventore, asperiores, distinctio quaerat
-          atque provident at odio blanditiis voluptas. Lorem ipsum dolor sit,
-          amet consectetur adipisicing elit. Numquam blanditiis iste esse
-          voluptatum ab maxime iure provident. Necessitatibus perferendis,
-          voluptas quidem libero, delectus veniam dolorum dolores id eius vero
-          fugiat. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Ratione ipsum qui repellat quos, recusandae voluptatem consequuntur
-          distinctio laboriosam a praesentium unde dicta consequatur numquam
-          incidunt. Ducimus vel odio atque ad. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Officia quibusdam corrupti numquam
-          aliquid accusamus! Expedita soluta provident saepe ab magni dicta
-          architecto vitae nemo! At sint eligendi odit! Quas, laborum!
+          {{ movie.overview }}
         </p>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Release date:</span>
         <div class="movie__date">
-          {{ '2021-05-26' | date : 'MMMM d, y' }}
+          {{ movie.release_date | date : 'MMMM d, y' }}
         </div>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Revenue:</span>
         <div class="movie__revenue">
-          {{ 42600000 | currency : 'CAD' : 'symbol-narrow' : '1.0-0' }}
+          {{ movie.revenue | currency : 'CAD' : 'symbol-narrow' : '1.0-0' }}
         </div>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Duration:</span>
         <div class="movie__duration">
-          {{ '2.14' | number : '1.0-2' }}
+          {{ movie.runtime | number : '1.0-2' }}
         </div>
       </div>
       <div class="movie__genres">
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
-        <span class="genre movie-genre">genre1</span>
+        <span class="genre movie-genre" *ngFor="let genre of movie.genres">
+          {{ genre.name }}
+        </span>
       </div>
       <div class="movie__actors">
         <div class="actors__head">
@@ -67,107 +52,13 @@
           </button>
         </div>
         <div class="actors__cards">
-          <app-actor-card routerLink="/actor"></app-actor-card>
-          <app-actor-card routerLink="/actor"></app-actor-card>
-          <app-actor-card routerLink="/actor"></app-actor-card>
-          <app-actor-card routerLink="/actor"></app-actor-card>
-          <app-actor-card routerLink="/actor"></app-actor-card>
+          <app-actor-card routerLink="/actor" *ngFor="let actor of (credits | async)" [actor]="actor"></app-actor-card>
         </div>
       </div>
       <div class="movie__images">
         <span class="movie__subtitle">Images</span>
         <div class="images__block">
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
-          <div class="images__item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="grey"
-              height="48"
-              viewBox="0 96 960 960"
-              width="48"
-            >
-              <path
-                d="M192 1001q-57 0-97-40t-40-97V288q0-57 40-97.5t97-40.5h576q57 0 97.5 40.5T906 288v576q0 57-40.5 97t-97.5 40H192Zm0-94h576q18.5 0 30.75-12.25T811 864V288q0-18.5-12.25-30.75T768 245H192q-18.5 0-30.75 12.25T149 288v576q0 18.5 12.25 30.75T192 907Zm59-107 149-150 72 72 88-111 151 189H251Zm74.911-303Q294 497 272 475.411q-22-21.588-22-53.5Q250 390 272.089 368q22.088-22 54-22Q358 346 379.5 368.089q21.5 22.088 21.5 54Q401 454 379.411 475.5q-21.588 21.5-53.5 21.5Z"
-              />
-            </svg>
-          </div>
+          <img class="images__item" *ngFor="let image of (images | async)" [src]="getImageUrl(image.file_path)" alt="">
         </div>
       </div>
     </div>

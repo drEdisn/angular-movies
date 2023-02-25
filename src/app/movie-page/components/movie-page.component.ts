@@ -1,16 +1,16 @@
-
+import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { mergeMap, forkJoin, BehaviorSubject, Observable } from 'rxjs';
+import { Movie } from 'src/app/main/models/movie.model';
+import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
 import { MovieCredits } from './../models/movie-credits.model';
 import { MovieImages, MovieImagePosters } from './../models/movie-images.model';
 import { Genres } from './../../main/models/genres.model';
 import { Cast } from './../../actor-page/models/cast.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { mergeMap, forkJoin, BehaviorSubject, Observable } from 'rxjs';
-import { Movie } from 'src/app/main/models/movie.model';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { movieArray } from 'src/assets/movieArray';
 import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { MovieFullInfo } from '../models/movie-full-info.model';
+
 
 type AllType = (Observable<Genres> | Observable<MovieImages> | Observable<MovieCredits> | Observable<MoviesSearchResult>)[];
 
@@ -46,29 +46,31 @@ const EmptyMovie: MovieFullInfo = {
   selector: 'app-movie-page',
   templateUrl: './movie-page.component.html',
   styleUrls: ['./movie-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviePageComponent implements OnInit {
-  movie: MovieFullInfo = EmptyMovie;
-  recommends  = new BehaviorSubject<Movie[]>([]);
-  credits = new BehaviorSubject<Cast[]>([]);
-  images = new BehaviorSubject<MovieImagePosters[]>([]);
-  movieArray: Movie[] = movieArray;
+  public movie: MovieFullInfo = EmptyMovie;
+  public recommends  = new BehaviorSubject<Movie[]>([]);
+  public credits = new BehaviorSubject<Cast[]>([]);
+  public images = new BehaviorSubject<MovieImagePosters[]>([]);
+  public movieArray: Movie[] = movieArrayMock;
 
+  
   @Input() id: number = 267805;
 
   constructor(
     private apiService: ApiService,
   ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.init();
   }
 
-  getImageUrl(path: string | null) {
+  public getImageUrl(path: string | null): string {
     return ImageUrls.imageUrl + path;
   }
 
-  private init() {
+  private init(): void {
     this.apiService.getMovie(this.id)
       .pipe(
         mergeMap(movie => {

@@ -1,6 +1,6 @@
-import { testMovies, testGenres } from './../../../../assets/testData';
+import { testMoviesMock, testGenresMock } from 'src/assets/mock/testData.mock';
 import { By } from '@angular/platform-browser';
-import { movieArray } from './../../../../assets/movieArray';
+import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
 import { of } from 'rxjs';
 import { PaginationComponent } from './../pagination/pagination.component';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -45,11 +45,11 @@ describe('MoviesViewComponent', () => {
     apiService = TestBed.inject(ApiService);
 
     const genres = spyOn(apiService, 'getGanres').and.callFake(() => {
-      return of(testGenres);
+      return of(testGenresMock);
     });
 
     const movies = spyOn(apiService, 'requestPopularMovie').and.callFake(() => {
-      return of(testMovies);
+      return of(testMoviesMock);
     });
 
     component.ngOnInit();
@@ -57,7 +57,7 @@ describe('MoviesViewComponent', () => {
     expect(movies).toHaveBeenCalled();
 
     component.movies.subscribe((movie) => {
-      expect(movie).toEqual(movieArray);
+      expect(movie).toEqual(movieArrayMock);
     });
   });
 

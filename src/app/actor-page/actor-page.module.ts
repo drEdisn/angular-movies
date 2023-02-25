@@ -1,6 +1,6 @@
 import { ActorPageRoutingModule } from './actor-page-routing.module';
 import { ActorPageComponent } from './components/actor-page.component';
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({

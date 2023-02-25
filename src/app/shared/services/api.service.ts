@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { MovieFullInfo } from './../../movie-page/models/movie-full-info.model';
 import { MovieCredits } from './../../movie-page/models/movie-credits.model';
 import { MovieImages } from './../../movie-page/models/movie-images.model';
@@ -14,33 +15,36 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  requestPopularMovie(page = 1) {
+  public requestPopularMovie(page = 1): Observable<MoviesSearchResult> {
     return this.http.get<MoviesSearchResult>(`${MovieApi.movie}${MovieApi.popular}?page=${page}`);
   }
 
-  requestSearchMovie(query: string, page = 1) {
+  public requestSearchMovie(
+    query: string,
+    page = 1,
+  ): Observable<MoviesSearchResult> {
     return this.http.get<MoviesSearchResult>(
       `${Api.seatchMovie}?query=${query}&page=${page}`,
     );
   }
 
-  getGanres() {
+  public getGanres(): Observable<Genres> {
     return this.http.get<Genres>(Api.genre);
   }
 
-  getMovie(id: number) {
+  public getMovie(id: number): Observable<MovieFullInfo> {
     return this.http.get<MovieFullInfo>(`${MovieApi.movie}${id}`);
   }
 
-  getMovieImages(id: number) {
+  public getMovieImages(id: number): Observable<MovieImages> {
     return this.http.get<MovieImages>(`${MovieApi.movie}${id}${MovieApi.images}`);
   }
 
-  getMovieCredits(id: number) {
+  public getMovieCredits(id: number): Observable<MovieCredits> {
     return this.http.get<MovieCredits>(`${MovieApi.movie}${id}${MovieApi.credits}`);
   }
 
-  getMovieRecommends(id: number) {
+  public getMovieRecommends(id: number): Observable<MoviesSearchResult> {
     return this.http.get<MoviesSearchResult>(`${MovieApi.movie}${id}${MovieApi.recommends}`);
   }
 }

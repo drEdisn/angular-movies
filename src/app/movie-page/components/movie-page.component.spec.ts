@@ -1,5 +1,5 @@
 import { ActorCardComponent } from './actor-card/actor-card.component';
-import { SharedModule } from './../../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MoviePageComponent } from './movie-page.component';

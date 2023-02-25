@@ -1,4 +1,4 @@
-import { movieArray } from './../../../../assets/movieArray';
+import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -35,7 +35,7 @@ describe('MovieItemComponent', () => {
 
   it('check properties', () => {
     service.genres = [{ name: '123', id: 28 }];
-    component.movieItem = movieArray[0];
+    component.movieItem = movieArrayMock[0];
     component.ngOnInit();
     component.genres.subscribe((genres) => {
       expect(genres.length).toBe(1);

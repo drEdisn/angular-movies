@@ -5,5 +5,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MoviesService {
-  genres: Genre[] = [];
+  public genres: Genre[] = [];
 }

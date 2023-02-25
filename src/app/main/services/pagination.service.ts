@@ -1,5 +1,5 @@
-import { Pages } from './../models/pagination.model';
-import { BehaviorSubject } from 'rxjs';
+import { Pages } from 'src/app/main/models/pagination.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { PaginationConst } from '../enums/pagination.enum';
 
@@ -7,19 +7,19 @@ import { PaginationConst } from '../enums/pagination.enum';
   providedIn: 'root',
 })
 export class PaginationService {
-  pages = new BehaviorSubject<number[]>([1]);
-  currentPage = new BehaviorSubject(1);
-  totalPages = PaginationConst.max;
+  public pages = new BehaviorSubject<number[]>([1]);
+  public currentPage = new BehaviorSubject<number>(1);
+  public totalPages: number = PaginationConst.max;
 
-  getCurrentPage() {
+  public getCurrentPage(): Observable<number> {
     return this.currentPage.asObservable();
   }
 
-  getPages() {
+  public getPages(): Observable<number[]> {
     return this.pages.asObservable();
   }
 
-  setPages(page: number) {
+  public setPages(page: number): void {
     const { maxPage, minPage } = this.getMaxMinPages(page);
     const pages: number[] = [];
 
@@ -31,7 +31,7 @@ export class PaginationService {
     this.currentPage.next(page || PaginationConst.min);
   }
 
-  setTotalPages(value: number) {
+  public setTotalPages(value: number): void {
     if (this.totalPages > value) {
       this.totalPages = value;
     }

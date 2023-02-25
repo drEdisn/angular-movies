@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MovieAPI {
   poster_path: string | null;
   adult: boolean;
   overview: string;
@@ -13,4 +13,21 @@ export interface Movie {
   vote_count: number;
   video: boolean;
   vote_average: number;
+}
+
+export interface Movie {
+  posterPath: string | null;
+  adult: boolean;
+  overview: string;
+  releaseDate: string;
+  originalTitle: string;
+  genreIds: number[];
+  id: number;
+  originalLanguage: string;
+  title: string;
+  backdropPath: string | null;
+  popularity: number;
+  voteCount: number;
+  video: boolean;
+  voteAverage: number;
 }

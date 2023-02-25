@@ -1,16 +1,16 @@
 export interface TVShows {
-  poster_path: string | null;
+  posterPath: string | null;
   popularity: number;
   id: number;
   overview: string;
-  backdrop_path: string | null;
-  vote_average: number;
-  media_type: string;
-  first_air_date: string;
-  origin_country: string[];
-  genre_ids: number[];
-  original_language: string;
-  vote_count: number;
+  backdropPath: string | null;
+  voteAverage: number;
+  mediaType: string;
+  firstAirDate: string;
+  originCountry: string[];
+  genreIds: number[];
+  originalLanguage: string;
+  voteCount: number;
   name: string;
-  original_name: string;
+  originalName: string;
 }

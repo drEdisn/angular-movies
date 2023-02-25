@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
   ChangeDetectionStrategy,
+  OnChanges,
 } from '@angular/core';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 
@@ -16,8 +17,9 @@ import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
   styleUrls: ['./movie-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MovieItemComponent implements OnInit {
-  public genres = new BehaviorSubject<Genre[]>([]);
+export class MovieItemComponent implements OnInit, OnChanges {
+  public genres$ = new BehaviorSubject<Genre[]>([]);
+  public posterPath = '';
 
   @Input() movieItem: Movie;
 
@@ -27,16 +29,20 @@ export class MovieItemComponent implements OnInit {
     this.setGeners();
   }
 
-  private setGeners(): void {
-    const genres = this.moviesService.genres.filter((genre) =>
-      this.movieItem.genre_ids.includes(genre.id),
-    );
-    this.genres.next(genres);
+  public ngOnChanges(): void {
+    this.posterPath = this.getImage();
   }
 
-  public getImage(): string {
-    if (this.movieItem.poster_path) {
-      return ImageUrls.imageUrl + this.movieItem.poster_path;
+  private setGeners(): void {
+    const genres = this.moviesService.genres.filter((genre) =>
+      this.movieItem.genreIds.includes(genre.id),
+    );
+    this.genres$.next(genres);
+  }
+
+  private getImage(): string {
+    if (this.movieItem?.posterPath) {
+      return ImageUrls.imageUrl + this.movieItem.posterPath;
     }
 
     return ImageUrls.define + ImageUrls.emptyImage;

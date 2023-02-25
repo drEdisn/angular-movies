@@ -7,7 +7,7 @@
     </div>
     <div class="movies">
       <app-movie-item
-        *ngFor="let movie of movies | async"
+        *ngFor="let movie of movies$ | async"
         [movieItem]="movie"
         [routerLink]="['/movies', movie.id]"
       ></app-movie-item>

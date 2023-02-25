@@ -17,19 +17,20 @@ describe('MovieItemComponent', () => {
 
     fixture = TestBed.createComponent(MovieItemComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(MoviesService);
+    service = TestBed.inject(MoviesService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    const image = spyOn(component, 'getImage');
     const init = spyOn(component, 'ngOnInit');
+    const changes = spyOn(component, 'ngOnChanges');
 
     component.ngOnInit();
-    component.getImage();
+    component.ngOnChanges();
 
+    
+    expect(changes).toHaveBeenCalled();
     expect(init).toHaveBeenCalled();
-    expect(image).toHaveBeenCalled();
     expect(component).toBeTruthy();
   });
 
@@ -37,8 +38,18 @@ describe('MovieItemComponent', () => {
     service.genres = [{ name: '123', id: 28 }];
     component.movieItem = movieArrayMock[0];
     component.ngOnInit();
-    component.genres.subscribe((genres) => {
+    component.genres$.subscribe((genres) => {
       expect(genres.length).toBe(1);
     });
   });
+
+  it('check image', () => {
+    component.ngOnChanges();
+    expect(component.posterPath).toEqual('./assets/images/empty-movie-icon.png');
+
+    component.movieItem = movieArrayMock[0];
+    component.ngOnChanges();
+
+    expect(component.posterPath).toEqual('https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg');
+  })
 });

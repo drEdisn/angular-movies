@@ -56,7 +56,7 @@ describe('MoviesViewComponent', () => {
     expect(genres).toHaveBeenCalled();
     expect(movies).toHaveBeenCalled();
 
-    component.movies.subscribe((movie) => {
+    component.movies$.subscribe((movie) => {
       expect(movie).toEqual(movieArrayMock);
     });
   });

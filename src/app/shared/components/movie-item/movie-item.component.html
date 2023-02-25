@@ -1,8 +1,8 @@
 <div class="movie" *ngIf="movieItem !== undefined">
   <div class="image-content">
     <img
-      [src]="getImage()"
-      [alt]="movieItem.original_title"
+      [src]="posterPath"
+      [alt]="movieItem.originalTitle"
       class="movie__image"
     />
     <svg
@@ -17,14 +17,14 @@
       />
     </svg>
     <div class="rating">
-      {{ movieItem.vote_average | number : '0.0-1' }}
+      {{ movieItem.voteAverage | number : '0.0-1' }}
     </div>
   </div>
   <p class="movie__title">
     {{ movieItem.title }}
   </p>
   <div class="movie__genres">
-    <span class="genre" *ngFor="let genre of genres | async">
+    <span class="genre" *ngFor="let genre of genres$ | async">
       {{ genre.name }}
     </span>
   </div>

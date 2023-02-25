@@ -11,12 +11,8 @@ export class HeaderComponent {
   public searchForm = this.fb.group({
     searchValue: [''],
   });
+  public margin = { marginBottom: '-1.25rem' };
 
   constructor(private fb: FormBuilder) {}
 
-  public resetMargin() {
-    return {
-      marginBottom: '-1.25rem',
-    };
-  }
 }

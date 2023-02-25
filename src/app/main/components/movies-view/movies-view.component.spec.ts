@@ -1,6 +1,6 @@
-import { testMovies, testGenres } from './../../../../assets/testData';
+import { testMovies, testGenres } from 'src/assets/mock/testData.mock';
 import { By } from '@angular/platform-browser';
-import { movieArray } from './../../../../assets/movieArray';
+import { movieArray } from 'src/assets/mock/movieArray.mock';
 import { of } from 'rxjs';
 import { PaginationComponent } from './../pagination/pagination.component';
 import { ApiService } from 'src/app/shared/services/api.service';

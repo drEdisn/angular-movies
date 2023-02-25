@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  searchForm = this.fb.group({
+  public searchForm = this.fb.group({
     searchValue: [''],
   });
 
   constructor(private fb: FormBuilder) {}
 
-  resetMargin() {
+  public resetMargin() {
     return {
       marginBottom: '-1.25rem',
     };

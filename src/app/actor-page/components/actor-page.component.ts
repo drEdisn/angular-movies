@@ -1,12 +1,13 @@
 import { Movie } from 'src/app/main/models/movie.model';
-import { movieArray } from './../../../assets/movieArray';
-import { Component } from '@angular/core';
+import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-components',
   templateUrl: './actor-page.component.html',
   styleUrls: ['./actor-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActorPageComponent {
-  movieArray: Movie[] = movieArray;
+  public movieArray: Movie[] = movieArrayMock;
 }

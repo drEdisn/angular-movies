@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { PaginationService } from './../../services/pagination.service';
+import { PaginationService } from 'src/app/main/services/pagination.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';

@@ -12,13 +12,15 @@ import { Api } from 'src/app/main/enums/api.enum';
   providedIn: 'root',
 })
 export class ApiInterceptorService implements HttpInterceptor {
-  intercept(
+  public intercept(
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const assetsReg = new RegExp('./assets');
+    const assetsReg: RegExp = new RegExp('./assets');
 
-    if (assetsReg.test(req.url)) return next.handle(req);
+    if (assetsReg.test(req.url)) {
+      return next.handle(req);
+    }
 
     const newRequest = req.clone({
       url: `${Api.url}${req.url}`,

@@ -1,4 +1,4 @@
-import { movieArray } from './../../../../assets/movieArray';
+import { movieArray } from 'src/assets/mock/movieArray.mock';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 

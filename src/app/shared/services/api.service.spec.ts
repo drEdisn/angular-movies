@@ -1,4 +1,4 @@
-import { testMovies, testGenres } from './../../../assets/testData';
+import { testMovies, testGenres } from '../../../assets/mock/testData.mock';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { TestBed } from '@angular/core/testing';

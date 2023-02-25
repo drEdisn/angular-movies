@@ -1,4 +1,4 @@
-import { Api } from './../../main/enums/api.enum';
+import { Api } from 'src/app/main/enums/api.enum';
 import { Observable, Subscriber } from 'rxjs';
 import { ApiInterceptorService } from './api-interceptor.service';
 import { TestBed } from '@angular/core/testing';

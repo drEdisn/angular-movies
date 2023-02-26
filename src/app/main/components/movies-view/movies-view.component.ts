@@ -4,7 +4,7 @@ import { PaginationService } from 'src/app/main/services/pagination.service';
 import { Movie } from 'src/app/main/models/movie.model';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 
 @Component({
@@ -14,9 +14,9 @@ import { MoviesService } from 'src/app/main/services/movies.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviesViewComponent implements OnInit, OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
   public movies$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
   public sections: string[] = ['Popular', 'Top-Rated', 'Upcoming'];
-  private desctroy: Subscription;
 
   constructor(
     private apiService: ApiService,
@@ -29,9 +29,9 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   }
 
   private init(): void {
-    this.desctroy = this.apiService.getGanres()
+    this.apiService.getGanres()
       .pipe(
-        take(1),
+        takeUntil(this.destroy$),
         switchMap((genres: Genres) => {
           this.moviesService.genres.push(...genres.genres);
           return this.apiService.requestPopularMovie();
@@ -45,6 +45,7 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.desctroy.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 }

@@ -7,8 +7,8 @@ import { PaginationConst } from '../enums/pagination.enum';
   providedIn: 'root',
 })
 export class PaginationService {
-  public pages$ = new BehaviorSubject<number[]>([1]);
-  public currentPage$ = new BehaviorSubject<number>(1);
+  public pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
+  public currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   public totalPages: number = PaginationConst.max;
 
   public getCurrentPage(): Observable<number> {

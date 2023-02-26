@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +8,9 @@ import { FormBuilder } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  public searchForm = this.fb.group({
+  public searchForm: FormGroup = this.fb.group({
     searchValue: [''],
   });
-  public margin = { marginBottom: '-1.25rem' };
 
   constructor(private fb: FormBuilder) {}
-
 }

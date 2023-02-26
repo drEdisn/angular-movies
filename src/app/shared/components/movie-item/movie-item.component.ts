@@ -18,8 +18,8 @@ import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieItemComponent implements OnInit, OnChanges {
-  public genres$ = new BehaviorSubject<Genre[]>([]);
-  public posterPath = '';
+  public genres$: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>([]);
+  public posterPath: string = '';
 
   @Input() movieItem: Movie;
 
@@ -34,7 +34,7 @@ export class MovieItemComponent implements OnInit, OnChanges {
   }
 
   private setGeners(): void {
-    const genres = this.moviesService.genres.filter((genre) =>
+    const genres: Genre[] = this.moviesService.genres.filter((genre) =>
       this.movieItem.genreIds.includes(genre.id),
     );
     this.genres$.next(genres);

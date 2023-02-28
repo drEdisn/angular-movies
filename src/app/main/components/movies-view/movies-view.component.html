@@ -1,0 +1,17 @@
+<main class="main">
+  <div class="container main__container">
+    <div class="sections">
+      <div class="sections__item" *ngFor="let section of sections">
+        {{ section }}
+      </div>
+    </div>
+    <div class="movies">
+      <app-movie-item
+        *ngFor="let movie of movies$ | async"
+        [movieItem]="movie"
+        [routerLink]="['/movies', movie.id]"
+      ></app-movie-item>
+    </div>
+    <app-pagination></app-pagination>
+  </div>
+</main>

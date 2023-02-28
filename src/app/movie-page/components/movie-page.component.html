@@ -1,4 +1,4 @@
-<div class="movie container">
+<div class="movie container" *ngIf="movie !== null">
   <div class="page-content">
     <div class="movie__image-content">
       <img
@@ -52,13 +52,13 @@
           </button>
         </div>
         <div class="actors__cards">
-          <app-actor-card routerLink="/actor" *ngFor="let actor of (credits | async)" [actor]="actor"></app-actor-card>
+          <app-actor-card routerLink="/actor" *ngFor="let actor of (credits$ | async)" [actor]="actor"></app-actor-card>
         </div>
       </div>
       <div class="movie__images">
         <span class="movie__subtitle">Images</span>
         <div class="images__block">
-          <img class="images__item" *ngFor="let image of (images | async)" [src]="getImageUrl(image.file_path)" alt="">
+          <img class="images__item" *ngFor="let image of (images$ | async)" [src]="getImageUrl(image.file_path)" alt="">
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
     <span class="movie__subtitle page-movie__title">RECOMMENDATIONS</span>
     <div class="page-movie__content">
       <app-movie-item
-        *ngFor="let movie of movieArray"
+        *ngFor="let movie of (recommends$ | async)"
         [movieItem]="movie"
       ></app-movie-item>
     </div>

@@ -7,16 +7,16 @@ import { PaginationConst } from '../enums/pagination.enum';
   providedIn: 'root',
 })
 export class PaginationService {
-  public pages = new BehaviorSubject<number[]>([1]);
-  public currentPage = new BehaviorSubject<number>(1);
+  public pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
+  public currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   public totalPages: number = PaginationConst.max;
 
   public getCurrentPage(): Observable<number> {
-    return this.currentPage.asObservable();
+    return this.currentPage$.asObservable();
   }
 
   public getPages(): Observable<number[]> {
-    return this.pages.asObservable();
+    return this.pages$.asObservable();
   }
 
   public setPages(page: number): void {
@@ -27,8 +27,8 @@ export class PaginationService {
       pages.push(i);
     }
 
-    this.pages.next(pages);
-    this.currentPage.next(page || PaginationConst.min);
+    this.pages$.next(pages);
+    this.currentPage$.next(page || PaginationConst.min);
   }
 
   public setTotalPages(value: number): void {

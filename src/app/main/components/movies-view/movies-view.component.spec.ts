@@ -35,8 +35,11 @@ describe('MoviesViewComponent', () => {
 
   it('should create', () => {
     const init = spyOn(component, 'ngOnInit');
+    const destroy = spyOn(component, 'ngOnDestroy');
 
     component.ngOnInit();
+    component.ngOnDestroy();
+    expect(destroy).toHaveBeenCalled();
     expect(init).toHaveBeenCalled();
     expect(component).toBeTruthy();
   });
@@ -56,7 +59,7 @@ describe('MoviesViewComponent', () => {
     expect(genres).toHaveBeenCalled();
     expect(movies).toHaveBeenCalled();
 
-    component.movies.subscribe((movie) => {
+    component.movies$.subscribe((movie) => {
       expect(movie).toEqual(movieArrayMock);
     });
   });

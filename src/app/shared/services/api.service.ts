@@ -1,13 +1,15 @@
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { SearchResultAPI } from 'src/app/main/models/search-result.model';
+import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
+import { Genres } from 'src/app/main/models/genres.model';
+import { Api } from 'src/app/main/enums/api.enum';
 import { MovieFullInfo } from './../../movie-page/models/movie-full-info.model';
 import { MovieCredits } from './../../movie-page/models/movie-credits.model';
 import { MovieImages } from './../../movie-page/models/movie-images.model';
 import { MovieApi } from './../../main/enums/api.enum';
-import { Genres } from '../../main/models/genres.model';
-import { MoviesSearchResult } from '../../main/models/search-result.model';
-import { Api } from '../../main/enums/api.enum';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { convertApiResultToResult } from 'src/app/main/models/converters/convertApiResultToResult';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,10 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public requestPopularMovie(page = 1): Observable<MoviesSearchResult> {
-    return this.http.get<MoviesSearchResult>(`${MovieApi.movie}${MovieApi.popular}?page=${page}`);
+    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${MovieApi.popular}?page=${page}`)
+      .pipe(map((res: SearchResultAPI) => {
+        return convertApiResultToResult(res);
+      }));
   }
 
   public requestSearchMovie(
@@ -45,6 +50,9 @@ export class ApiService {
   }
 
   public getMovieRecommends(id: number): Observable<MoviesSearchResult> {
-    return this.http.get<MoviesSearchResult>(`${MovieApi.movie}${id}${MovieApi.recommends}`);
+    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${id}${MovieApi.recommends}`)
+      .pipe(map((res: SearchResultAPI) => {
+        return convertApiResultToResult(res);
+      }));
   }
 }

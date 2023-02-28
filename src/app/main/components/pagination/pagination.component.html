@@ -1,7 +1,7 @@
 <div class="pagination">
   <div
     class="pagination__page"
-    *ngFor="let page of paginationService.pages | async"
+    *ngFor="let page of paginationService.pages$ | async"
     [ngClass]="page === (currentPage$ | async) ? 'current' : ''"
   >
     {{ page }}

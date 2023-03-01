@@ -9,8 +9,9 @@
 
   &__image {
     background-color: var(--dark-3);
-    width: 250px;
-    height: 350px;
+    min-width: 220px;
+    max-width: 250px;
+    min-height: 350px;
     object-fit: contain;
     border-radius: 5px;
   }
@@ -86,11 +87,13 @@
   }
 
   &__item {
+    cursor: pointer;
     background-color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 80px;
+    min-width: 180px;
+    min-height: 110px;
     width: calc(100% / 4 - 0.95rem);
     height: calc(100% / 2 - 1rem);
     border-radius: 5px;
@@ -101,8 +104,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
+  min-width: 50px;
   height: 25px;
   color: var(--white);
   background-color: var(--green-3);
+}
+
+.show {
+   flex-wrap: wrap;
 }

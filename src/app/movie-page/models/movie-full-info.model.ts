@@ -18,6 +18,18 @@ interface Language {
 }
 
 export interface MovieFullInfo {
+  genres: Genre[],
+  id: number,
+  overview: string,
+  posterPath: string | null,
+  releaseDate: string,
+  revenue: number,
+  runtime: number,
+  title: string,
+  voteAverage: number,
+}
+
+export interface MovieFullInfoApi {
   adult: boolean,
   backdrop_path: string | null,
   belongs_to_collection: null | object,

@@ -1,13 +1,9 @@
 <div class="movie container" *ngIf="movie !== null">
   <div class="page-content">
     <div class="movie__image-content">
-      <img
-        [src]="getImageUrl(movie.poster_path)"
-        [alt]="movie.title"
-        class="movie__image"
-      />
+      <img [src]="moviePosterPath" [alt]="movie.title" class="movie__image" />
       <div class="rating">
-        {{ movie.vote_average | number : '0.0-1' }}
+        {{ movie.voteAverage | number : '0.0-1' }}
       </div>
     </div>
     <div class="movie__about">
@@ -24,7 +20,7 @@
       <div class="subcontent">
         <span class="seciton-name">Release date:</span>
         <div class="movie__date">
-          {{ movie.release_date | date : 'MMMM d, y' }}
+          {{ movie.releaseDate | date : 'MMMM d, y' }}
         </div>
       </div>
       <div class="subcontent">
@@ -47,7 +43,7 @@
       <div class="movie__actors">
         <div class="actors__head">
           <span class="movie__subtitle">Top Billed Cast</span>
-          <button mat-stroked-button class="actors__show-button">
+          <button mat-stroked-button class="actors__show-button" appShow>
             Show all
           </button>
         </div>
@@ -58,7 +54,13 @@
       <div class="movie__images">
         <span class="movie__subtitle">Images</span>
         <div class="images__block">
-          <img class="images__item" *ngFor="let image of (images$ | async)" [src]="getImageUrl(image.file_path)" alt="">
+          <img
+            class="images__item"
+            *ngFor="let image of (images$ | async)"
+            [src]="getImageUrl(image.file_path)"
+            [alt]="image.file_path"
+            (click)="openPopup(image.file_path)"
+          >
         </div>
       </div>
     </div>
@@ -66,10 +68,9 @@
   <div class="page-movie page-content">
     <span class="movie__subtitle page-movie__title">RECOMMENDATIONS</span>
     <div class="page-movie__content">
-      <app-movie-item
-        *ngFor="let movie of (recommends$ | async)"
-        [movieItem]="movie"
-      ></app-movie-item>
+      <app-movie-item *ngFor="let movie of (recommends$ | async)" [movieItem]="movie"></app-movie-item>
     </div>
   </div>
 </div>
+
+<app-image-popup *ngIf="popupService.isOpen | async"></app-image-popup>

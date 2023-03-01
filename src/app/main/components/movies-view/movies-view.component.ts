@@ -33,7 +33,7 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((genres: Genres) => {
-          this.moviesService.genres.push(...genres.genres);
+          this.moviesService.genres = genres.genres;
           return this.apiService.requestPopularMovie();
         }),
       )

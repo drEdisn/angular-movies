@@ -1,5 +1,6 @@
+import { PopupService } from './../services/popup.service';
 import { MoviesService } from 'src/app/main/services/movies.service';
-import { Component, ChangeDetectionStrategy, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject, takeUntil, Subject } from 'rxjs';
 import { Movie } from 'src/app/main/models/movie.model';
 import { MovieImagePosters, MovieImages } from './../models/movie-images.model';
@@ -10,34 +11,7 @@ import { MovieFullInfo } from '../models/movie-full-info.model';
 import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { MovieCredits } from '../models/movie-credits.model';
 import { Genres } from 'src/app/main/models/genres.model';
-
-// const EmptyMovie: MovieFullInfo = {
-//   adult: false,
-//   backdrop_path: null,
-//   belongs_to_collection: null,
-//   budget: 0,
-//   genres: [],
-//   homepage: null,
-//   id: 0,
-//   imdb_id: 0,
-//   original_language: '',
-//   original_title: '',
-//   overview: '',
-//   popularity: 0,
-//   poster_path: null,
-//   production_companies: [],
-//   prouction_countries: [],
-//   release_date: '',
-//   revenue: 0,
-//   runtime: 0,
-//   spoken_languages: [],
-//   status: '',
-//   tagline: null,
-//   title: '',
-//   video: false,
-//   vote_average: 0,
-//   vote_count: 0,
-// }
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movie-page',
@@ -51,25 +25,42 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   public credits$: BehaviorSubject<Cast[]> = new BehaviorSubject<Cast[]>([]);
   public images$: BehaviorSubject<MovieImagePosters[]> = new BehaviorSubject<MovieImagePosters[]>([]);
   public movie: MovieFullInfo | null = null;
-
-  
-  @Input() id: number = 267805;
+  public moviePosterPath: string = '';
+  private id: number = 0;
 
   constructor(
     private apiService: ApiService,
     private cdr: ChangeDetectorRef,
     private moviesService: MoviesService,
+    private router: ActivatedRoute,
+    public popupService: PopupService,
   ) {}
 
   public ngOnInit(): void {
     this.init();
   }
 
-  public getImageUrl(path: string | null): string {
-    return ImageUrls.imageUrl + path;
+  public getImageUrl(path: string | null, isMovie = false): string {
+    if (path) {
+      return ImageUrls.imageUrl + path;
+    }
+    if (isMovie) {
+      return ImageUrls.define + ImageUrls.emptyMovieImage;
+    }
+
+    return ImageUrls.define + ImageUrls.emptyImage;
+  }
+
+  public openPopup(path: string) {
+    this.popupService.open(this.getImageUrl(path));
+  }
+
+  private setId(): void {
+    this.id = this.router.snapshot.params['id'];
   }
 
   private init(): void {
+    this.setId();
     if (this.moviesService.genres.length === 0) {
       this.setGenres();
     }
@@ -90,6 +81,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieFullInfo) => {
         this.movie = result;
+        this.moviePosterPath = this.getImageUrl(result.posterPath);
         this.cdr.detectChanges();
       });
   }
@@ -114,7 +106,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
     this.apiService.getMovieImages(this.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieImages) => {
-        this.images$.next(result.backdrops);
+        this.images$.next(result.backdrops.splice(0, 8));
       });
   }
 

@@ -1,5 +1,5 @@
 <div class="actor" *ngIf="actor !== null">
-  <img src="assets/images/person-icon.png" alt="actor" class="actor__image" />
-  <h5 class="actor__name">{{ actor.original_name }}</h5>
-  <p class="actor__character">{{ actor.name }}</p>
+  <img [src]="actorImagePath" alt="actor" class="actor__image" />
+  <h5 class="actor__name">{{ actor.name }}</h5>
+  <p class="actor__character">{{ actor.character }}</p>
 </div>

@@ -2,6 +2,7 @@ import { Pages } from 'src/app/main/models/pagination.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { PaginationConst } from '../enums/pagination.enum';
+import { MoviesService } from './movies.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,10 @@ export class PaginationService {
   public pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
   public currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   public totalPages: number = PaginationConst.max;
+
+  constructor(
+    private moviesService: MoviesService,
+  ) {}
 
   public getCurrentPage(): Observable<number> {
     return this.currentPage$.asObservable();

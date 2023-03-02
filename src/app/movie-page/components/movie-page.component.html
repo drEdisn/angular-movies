@@ -57,9 +57,9 @@
           <img
             class="images__item"
             *ngFor="let image of (images$ | async)"
-            [src]="getImageUrl(image.file_path)"
-            [alt]="image.file_path"
-            (click)="openPopup(image.file_path)"
+            [src]="getImageUrl(image.filePath)"
+            [alt]="image.filePath"
+            (click)="openPopup(image.filePath)"
           >
         </div>
       </div>

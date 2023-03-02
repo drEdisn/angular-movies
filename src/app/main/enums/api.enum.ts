@@ -8,8 +8,13 @@ export enum Api {
 
 export enum MovieApi {
   movie = 'movie/',
-  popular = 'popular',
   images = '/images',
   credits = '/credits',
   recommends = '/recommendations',
+}
+
+export enum TabPath {
+  popular = 'popular',
+  topRated = 'top_rated',
+  upcoming = 'upcoming',
 }

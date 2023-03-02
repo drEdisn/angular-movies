@@ -4,7 +4,7 @@ import { PaginationService } from 'src/app/main/services/pagination.service';
 import { Movie } from 'src/app/main/models/movie.model';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
+import { Subject, switchMap, takeUntil, Observable } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 })
 export class MoviesViewComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  public movies$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
+  public movies$: Observable<Movie[]> = this.moviesService.getMovies();
   public sections: string[] = ['Popular', 'Top-Rated', 'Upcoming'];
 
   constructor(
@@ -34,11 +34,11 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         switchMap((genres: Genres) => {
           this.moviesService.genres = genres.genres;
-          return this.apiService.requestPopularMovie();
+          return this.apiService.requestTabMovie(this.moviesService.getCurrentTabValue());
         }),
       )
       .subscribe((result: MoviesSearchResult) => {
-        this.movies$.next(result.results);
+        this.moviesService.setMovies(result.results);
         this.paginationService.setTotalPages(result.totalPages);
         this.paginationService.setPages(result.page);
       });

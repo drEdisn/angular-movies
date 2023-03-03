@@ -1,8 +1,8 @@
-import { Crew } from './../../actor-page/models/crew.model';
-import { Cast } from "src/app/actor-page/models/cast.model";
+import { MovieCrew } from './movie-crew.model';
+import { MovieCast } from "./movie-cast.model";
 
 export interface MovieCredits {
   id: number,
-  cast: Cast[],
-  crew: Crew[],
+  cast: MovieCast[],
+  crew: MovieCrew[],
 }

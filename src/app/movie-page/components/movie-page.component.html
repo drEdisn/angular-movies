@@ -48,7 +48,7 @@
           </button>
         </div>
         <div class="actors__cards">
-          <app-actor-card routerLink="/actor" *ngFor="let actor of (credits$ | async)" [actor]="actor"></app-actor-card>
+          <app-actor-card [routerLink]="['/actor', actor.id]" *ngFor="let actor of (credits$ | async)" [actor]="actor"></app-actor-card>
         </div>
       </div>
       <div class="movie__images">

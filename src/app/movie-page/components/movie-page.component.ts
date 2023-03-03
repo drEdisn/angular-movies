@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRe
 import { BehaviorSubject, takeUntil, Subject } from 'rxjs';
 import { Movie } from 'src/app/main/models/movie.model';
 import { MovieImagePosters, MovieImages } from './../models/movie-images.model';
-import { Cast } from 'src/app/actor-page/models/cast.model';
+import { MovieCast } from 'src/app/movie-page/models/movie-cast.model';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { MovieFullInfo } from '../models/movie-full-info.model';
@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MoviePageComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   public recommends$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
-  public credits$: BehaviorSubject<Cast[]> = new BehaviorSubject<Cast[]>([]);
+  public credits$: BehaviorSubject<MovieCast[]> = new BehaviorSubject<MovieCast[]>([]);
   public images$: BehaviorSubject<MovieImagePosters[]> = new BehaviorSubject<MovieImagePosters[]>([]);
   public movie: MovieFullInfo | null = null;
   public moviePosterPath: string = '';

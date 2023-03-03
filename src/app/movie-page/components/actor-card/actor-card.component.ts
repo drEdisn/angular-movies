@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
-import { Cast } from 'src/app/actor-page/models/cast.model';
+import { MovieCast } from 'src/app/movie-page/models/movie-cast.model';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 
 @Component({
@@ -11,7 +11,7 @@ import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 export class ActorCardComponent implements OnInit {
   public actorImagePath: string = '';
 
-  @Input() actor: Cast | null = null;
+  @Input() actor: MovieCast | null = null;
 
   public ngOnInit(): void {
     this.actorImagePath = this.setActorImage();

@@ -1,8 +1,11 @@
+import { PersonImagesResultApi } from './../../actor-page/models/person-images-result';
+import { Person, PersonApi } from './../../actor-page/models/person.model';
+import { PersonCredits, PersonCreditsApi } from 'src/app/actor-page/models/person-credits.model';
 import { Observable, map } from 'rxjs';
 import { SearchResultAPI } from 'src/app/main/models/search-result.model';
 import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { Genres } from 'src/app/main/models/genres.model';
-import { Api, TabPath } from 'src/app/main/enums/api.enum';
+import { Api, PeopleApi, TabPath } from 'src/app/main/enums/api.enum';
 import { MovieFullInfo, MovieFullInfoApi } from 'src/app/movie-page/models/movie-full-info.model';
 import { MovieCredits } from 'src/app/movie-page/models/movie-credits.model';
 import { MovieImages, MovieImagesApi } from 'src/app/movie-page/models/movie-images.model';
@@ -12,6 +15,8 @@ import { HttpClient } from '@angular/common/http';
 import { convertApiResultToResult } from 'src/app/main/models/converters/convertApiResultToResult';
 import { convertFulMovieInfoToMovie } from 'src/app/movie-page/models/converters/convertFullMovieInfoToMovie';
 import { convertImagesApiToImages } from 'src/app/movie-page/models/converters/convertImagesApiToImages';
+import { convertPersonCreditsToMovie } from 'src/app/actor-page/models/converters/convertPersonCreditsToMovie';
+import { convertPersonApiToPerson } from 'src/app/actor-page/models/converters/convertPersonApiToPerson';
 
 @Injectable({
   providedIn: 'root',
@@ -62,5 +67,23 @@ export class ApiService {
       .pipe(map((res: SearchResultAPI) => {
         return convertApiResultToResult(res);
       }));
+  }
+
+  public getPersonCredits(id: number): Observable<PersonCredits> {
+    return this.http.get<PersonCreditsApi>(`${PeopleApi.person}${id}${PeopleApi.credits}`)
+      .pipe(map((credits: PersonCreditsApi) => {
+        return convertPersonCreditsToMovie(credits);
+      }));
+  }
+
+  public getPersonInfo(id: number): Observable<Person> {
+    return this.http.get<PersonApi>(`${PeopleApi.person}${id}`)
+      .pipe(map((person: PersonApi) => {
+        return convertPersonApiToPerson(person);
+      }));
+  }
+
+  public getPersonImages(id: number): Observable<PersonImagesResultApi> {
+    return this.http.get<PersonImagesResultApi>(`${PeopleApi.person}${id}${PeopleApi.images}`);
   }
 }

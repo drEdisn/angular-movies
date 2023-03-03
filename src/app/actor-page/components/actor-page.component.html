@@ -1,62 +1,28 @@
-<div class="actor-page container">
+<div class="actor-page container" *ngIf="person !== null">
   <div class="page-content">
-    <img src="assets/images/person-icon.png" alt="actor" class="actor__image" />
+    <img [src]="profilePath" alt="actor" class="actor__image" />
     <div class="actor__about">
       <h4 class="actor__title">Actor Name</h4>
       <div class="subcontent">
         <span class="seciton-name">Birthday:</span>
         <div class="actor__birthday">
-          {{ '1995-05-26' | date : 'MMMM d, y' }}
+          {{ person.birthday | date : 'MMMM d, y' }}
         </div>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Place of bitrh:</span>
-        <div class="actor__place">Paddington, London, England</div>
+        <div class="actor__place">{{ person.placeOfBirth }}</div>
       </div>
       <div class="subcontent">
         <span class="seciton-name">Biography:</span>
-        <p class="actor__biography">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,
-          amet eveniet. Culpa expedita consequatur voluptate repellendus optio
-          minima voluptatum ullam inventore, asperiores, distinctio quaerat
-          atque provident at odio blanditiis voluptas. Lorem ipsum dolor sit,
-          amet consectetur adipisicing elit. Numquam blanditiis iste esse
-          voluptatum ab maxime iure provident. Necessitatibus perferendis,
-          voluptas quidem libero, delectus veniam dolorum dolores id eius vero
-          fugiat. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Ratione ipsum qui repellat quos, recusandae voluptatem consequuntur
-          distinctio laboriosam a praesentium unde dicta consequatur numquam
-          incidunt. Ducimus vel odio atque ad. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Officia quibusdam corrupti numquam
-          aliquid accusamus! Expedita soluta provident saepe ab magni dicta
-          architecto vitae nemo! At sint eligendi odit! Quas, laborum!
-        </p>
+        <p class="actor__biography">{{ person.biography }}</p>
       </div>
       <div class="subcontent actor__images">
         <span class="actor__subtitle">Photos</span>
         <div class="images__block">
           <img
-            src="assets/images/person-icon.png"
-            alt="actor"
-            class="images__item"
-          />
-          <img
-            src="assets/images/person-icon.png"
-            alt="actor"
-            class="images__item"
-          />
-          <img
-            src="assets/images/person-icon.png"
-            alt="actor"
-            class="images__item"
-          />
-          <img
-            src="assets/images/person-icon.png"
-            alt="actor"
-            class="images__item"
-          />
-          <img
-            src="assets/images/person-icon.png"
+            *ngFor="let image of images$ | async"
+            [src]=""
             alt="actor"
             class="images__item"
           />
@@ -68,7 +34,7 @@
     <span class="actor__subtitle page-movie__title">KNOWN BY</span>
     <div class="page-movie__content">
       <app-movie-item
-        *ngFor="let movie of movieArray"
+        *ngFor="let movie of credits$ | async"
         [movieItem]="movie"
       ></app-movie-item>
     </div>

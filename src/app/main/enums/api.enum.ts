@@ -13,6 +13,13 @@ export enum MovieApi {
   recommends = '/recommendations',
 }
 
+export enum PeopleApi {
+  person = 'person/',
+  images = '/images',
+  credits = '/movie_credits',
+  recommends = '/recommendations',
+}
+
 export enum TabPath {
   popular = 'popular',
   topRated = 'top_rated',

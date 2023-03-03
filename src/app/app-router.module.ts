@@ -8,7 +8,7 @@ const ROUTES: Routes = [
     loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
   },
   {
-    path: 'actor',
+    path: 'actor/:id',
     loadChildren: () =>
       import('./actor-page/actor-page.module').then((m) => m.ActorPageModule),
   },

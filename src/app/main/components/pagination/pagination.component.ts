@@ -1,5 +1,8 @@
-import { Observable } from 'rxjs';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { MoviesService } from 'src/app/main/services/movies.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { PaginationService } from 'src/app/main/services/pagination.service';
 
 @Component({
@@ -8,9 +11,30 @@ import { PaginationService } from 'src/app/main/services/pagination.service';
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnDestroy {
+  public pages$: Observable<number[]> = this.paginationService.getPages();
   public currentPage$: Observable<number> =
     this.paginationService.getCurrentPage();
+  private destroy$: Subject<void> = new Subject<void>();
+  
 
-  constructor(public paginationService: PaginationService) {}
+  constructor(
+    private paginationService: PaginationService,
+    private moviesService: MoviesService,
+    private apiService: ApiService,
+  ) {}
+
+  public changePage(page: number): void {
+    this.paginationService.setCurrentPage(page);
+    this.apiService.requestTabMovie(this.moviesService.getCurrentTabValue(), page)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((movies: MoviesSearchResult) => {
+        this.moviesService.setMovies(movies.results);
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
+  }
 }

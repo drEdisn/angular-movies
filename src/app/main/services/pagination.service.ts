@@ -1,23 +1,36 @@
+import { LocalStore } from './../enums/localStore.enum';
 import { Pages } from 'src/app/main/models/pagination.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { PaginationConst } from '../enums/pagination.enum';
-import { MoviesService } from './movies.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaginationService {
-  public pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
-  public currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
+  private currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(this.getLocalPage());
   public totalPages: number = PaginationConst.max;
-
-  constructor(
-    private moviesService: MoviesService,
-  ) {}
 
   public getCurrentPage(): Observable<number> {
     return this.currentPage$.asObservable();
+  }
+
+  public setCurrentPage(page: number): void {
+    if (page <= this.totalPages) {
+      this.currentPage$.next(page);
+      this.setPages(page);
+      this.setLocalPage(page);
+    }
+  }
+
+  public setLocalPage(page: number): void {
+    localStorage.setItem(LocalStore.page, `${page}`);
+  }
+
+  public getLocalPage(): number {
+    const page: number = Number(localStorage.getItem(LocalStore.page)); 
+    return page || 1;
   }
 
   public getPages(): Observable<number[]> {

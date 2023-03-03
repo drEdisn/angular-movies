@@ -49,3 +49,8 @@
     }
   }
 }
+
+._active {
+  border: 1px solid var(--dark-5);
+  background-color: var(--dark-5);
+}

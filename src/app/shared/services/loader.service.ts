@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoaderService {
-  private isOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false,
+  );
 
   public getIsOpenValue(): Observable<boolean> {
     return this.isOpen.asObservable();

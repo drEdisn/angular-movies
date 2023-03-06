@@ -47,7 +47,8 @@ export class PaginationService {
   }
 
   public setTotalPages(value: number): void {
-    this.totalPages = (value <= PaginationConst.max) ? value : PaginationConst.max;
+    this.totalPages =
+      value <= PaginationConst.max ? value : PaginationConst.max;
   }
 
   private getMaxMinPages(page: number): Pages {

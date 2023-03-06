@@ -1,6 +1,8 @@
 import { PersonCredits, PersonCreditsApi } from './../person-credits.model';
 
-export function convertPersonCreditsToMovie(credits: PersonCreditsApi): PersonCredits {
+export function convertPersonCreditsToMovie(
+  credits: PersonCreditsApi,
+): PersonCredits {
   const cast = credits.cast.map((movie) => {
     return {
       posterPath: movie.poster_path,

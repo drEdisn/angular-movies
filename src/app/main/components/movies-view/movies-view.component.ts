@@ -3,7 +3,12 @@ import { Genres } from 'src/app/main/models/genres.model';
 import { PaginationService } from 'src/app/main/services/pagination.service';
 import { Movie } from 'src/app/main/models/movie.model';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subject, switchMap, takeUntil, Observable } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { TabPath } from 'src/app/main/enums/api.enum';

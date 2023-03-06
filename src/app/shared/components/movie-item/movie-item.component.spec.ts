@@ -44,7 +44,9 @@ describe('MovieItemComponent', () => {
 
   it('check image', () => {
     component.ngOnChanges();
-    expect(component.posterPath).toEqual('./assets/images/empty-movie-icon.png');
+    expect(component.posterPath).toEqual(
+      './assets/images/empty-movie-icon.png',
+    );
 
     component.movieItem = movieArrayMock[0];
     component.ngOnChanges();

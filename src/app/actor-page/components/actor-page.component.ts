@@ -1,4 +1,4 @@
-import { PopupService } from './../../shared/services/popup.service';
+import { PopupService } from 'src/app/shared/services/popup.service';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { PersonCredits } from 'src/app/actor-page/models/person-credits.model';
 import {

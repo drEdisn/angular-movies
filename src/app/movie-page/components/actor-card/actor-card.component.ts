@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MovieCast } from 'src/app/movie-page/models/movie-cast.model';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { getImageUrl } from 'src/app/functions/check-image';

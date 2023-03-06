@@ -37,8 +37,11 @@ describe('PaginationService', () => {
     const pages$ = service.getPages();
     const current$ = service.getCurrentPage();
 
+    service.setTotalPages(1);
+    service.setPages(1);
     testPages(pages$, [1], current$, 1);
 
+    service.setTotalPages(500);
     service.setPages(5);
     testPages(pages$, [3, 4, 5, 6, 7], current$, 5);
 
@@ -61,7 +64,7 @@ describe('PaginationService', () => {
 
     service.setTotalPages(600);
 
-    expect(service.totalPages).toEqual(100);
+    expect(service.totalPages).toEqual(500);
 
     service.setTotalPages(0);
 

@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpEvent, HttpHandler } from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpEvent,
+  HttpHandler,
+} from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
 import { Api } from 'src/app/main/enums/api.enum';
 import { LoaderService } from './loader.service';
@@ -8,12 +13,12 @@ import { LoaderService } from './loader.service';
   providedIn: 'root',
 })
 export class ApiInterceptorService implements HttpInterceptor {
+  constructor(private loaderService: LoaderService) {}
 
-  constructor(
-   private loaderService: LoaderService,
-  ) {}
-
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const assetsReg: RegExp = new RegExp('./assets');
 
     this.loaderService.openLoader();
@@ -28,7 +33,9 @@ export class ApiInterceptorService implements HttpInterceptor {
     });
 
     return next.handle(newRequest).pipe(
-      finalize(() => { this.loaderService.closeLoader() }),
+      finalize(() => {
+        this.loaderService.closeLoader();
+      }),
     );
   }
 }

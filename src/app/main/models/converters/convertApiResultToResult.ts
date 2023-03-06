@@ -2,7 +2,9 @@ import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { SearchResultAPI } from './../search-result.model';
 import { setMovies } from './convertMovieApiToMovie';
 
-export function convertApiResultToResult(apiResult: SearchResultAPI): MoviesSearchResult {
+export function convertApiResultToResult(
+  apiResult: SearchResultAPI,
+): MoviesSearchResult {
   return (
     {
       page: apiResult.page,

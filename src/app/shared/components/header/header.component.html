@@ -3,9 +3,17 @@
     <h1 class="header__title">
       {{ 'title' | translate }}
     </h1>
-    <form class="header__search-form" [formGroup]="searchForm" (ngSubmit)="search()">
+    <form
+      class="header__search-form"
+      [formGroup]="searchForm"
+      (ngSubmit)="search()"
+    >
       <mat-form-field class="field">
-        <input formControlName="searchValue" matInput [placeholder]="'placeholder' | translate" />
+        <input
+          formControlName="searchValue"
+          matInput
+          [placeholder]="'placeholder' | translate"
+        />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>

@@ -38,7 +38,8 @@ export class HeaderComponent {
     this.moviesService.setCurrentTab(TabPath.search);
     this.moviesService.searchValue = requestQuery;
 
-    this.apiService.requestSearchMovie(requestQuery)
+    this.apiService
+      .requestSearchMovie(requestQuery)
       .subscribe((result: MoviesSearchResult) => {
         this.setMoviesAndPagination(result);
       });
@@ -47,7 +48,8 @@ export class HeaderComponent {
   private getPopularMovie(): void {
     this.moviesService.setCurrentTab(TabPath.popular);
 
-    this.apiService.requestTabMovie(TabPath.popular)
+    this.apiService
+      .requestTabMovie(TabPath.popular)
       .subscribe((result: MoviesSearchResult) => {
         this.setMoviesAndPagination(result);
       });

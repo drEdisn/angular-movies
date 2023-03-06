@@ -1,5 +1,7 @@
 import { MovieFullInfo, MovieFullInfoApi } from './../movie-full-info.model';
-export function convertFulMovieInfoToMovie(movie: MovieFullInfoApi): MovieFullInfo {
+export function convertFulMovieInfoToMovie(
+  movie: MovieFullInfoApi,
+): MovieFullInfo {
   return {
     genres: movie.genres,
     id: movie.id,

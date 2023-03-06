@@ -5,12 +5,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
   public isOpen: Observable<boolean> = this.loaderService.getIsOpenValue();
 
-  constructor(
-    private loaderService: LoaderService,
-  ) {}
+  constructor(private loaderService: LoaderService) {}
 }

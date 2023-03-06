@@ -4,7 +4,7 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { PaginationService } from 'src/app/main/services/pagination.service';
-import { TabPath } from '../../enums/api.enum';
+import { TabPath } from 'src/app/main/enums/api.enum';
 
 @Component({
   selector: 'app-pagination',
@@ -35,7 +35,8 @@ export class PaginationComponent implements OnDestroy {
   }
 
   private getSearchMoviePage(page: number): void {
-    this.apiService.requestSearchMovie(this.moviesService.searchValue, page)
+    this.apiService
+      .requestSearchMovie(this.moviesService.searchValue, page)
       .pipe(takeUntil(this.destroy$))
       .subscribe((movies: MoviesSearchResult) => {
         this.moviesService.setMovies(movies.results);
@@ -43,7 +44,8 @@ export class PaginationComponent implements OnDestroy {
   }
 
   private getPopularMoviePage(page: number): void {
-    this.apiService.requestTabMovie(this.moviesService.getCurrentTabValue(), page)
+    this.apiService
+      .requestTabMovie(this.moviesService.getCurrentTabValue(), page)
       .pipe(takeUntil(this.destroy$))
       .subscribe((movies: MoviesSearchResult) => {
         this.moviesService.setMovies(movies.results);

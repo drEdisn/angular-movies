@@ -13,7 +13,8 @@ interface Country {
 }
 
 interface Language {
-  inso_639_1: string;
+  english_name: string;
+  iso_639_1: string;
   name: string;
 }
 
@@ -37,14 +38,14 @@ export interface MovieFullInfoApi {
   genres: Genre[];
   homepage: string | null;
   id: number;
-  imdb_id: number;
+  imdb_id: string;
   original_language: string;
   original_title: string;
   overview: string;
   popularity: number;
   poster_path: string | null;
   production_companies: Company[];
-  prouction_countries: Country[];
+  production_countries: Country[];
   release_date: string;
   revenue: number;
   runtime: number;

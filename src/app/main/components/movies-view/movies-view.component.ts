@@ -7,11 +7,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Subject, switchMap, takeUntil, Observable } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { TabPath } from 'src/app/main/enums/api.enum';
-
-interface Section {
-  name: string,
-  tab: TabPath,
-}
+import { Section } from 'src/app/main/models/section.model';
 
 @Component({
   selector: 'app-movies-view',
@@ -24,10 +20,10 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   public movies$: Observable<Movie[]> = this.moviesService.getMovies();
   public currentTab$: Observable<TabPath> = this.moviesService.getCurrentTab();
   public sections: Section[] = [
-    {name: 'Popular', tab: TabPath.popular},
-    {name: 'Top Rated', tab: TabPath.topRated},
-    {name: 'Upcoming', tab: TabPath.upcoming},
-  ];;
+    { name: 'Popular', tab: TabPath.popular },
+    { name: 'Top Rated', tab: TabPath.topRated },
+    { name: 'Upcoming', tab: TabPath.upcoming },
+  ];
 
   constructor(
     private apiService: ApiService,
@@ -40,7 +36,8 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   }
 
   private init(): void {
-    this.apiService.getGanres()
+    this.apiService
+      .getGanres()
       .pipe(
         takeUntil(this.destroy$),
         switchMap((genres: Genres) => {
@@ -58,7 +55,8 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
 
   public changeTab(tab: TabPath): void {
     this.moviesService.setCurrentTab(tab);
-    this.apiService.requestTabMovie(tab)
+    this.apiService
+      .requestTabMovie(tab)
       .pipe(takeUntil(this.destroy$))
       .subscribe((movies: MoviesSearchResult) => {
         this.setMoviesAndPagination(movies);

@@ -3,11 +3,11 @@ import { PersonCastApi } from './person-cast.model';
 import { PersonCrewApi } from './person-crew.model';
 
 export interface PersonCreditsApi {
-  cast: PersonCastApi[],
-  crew: PersonCrewApi[],
-  id: number,
+  cast: PersonCastApi[];
+  crew: PersonCrewApi[];
+  id: number;
 }
 
 export interface PersonCredits {
-  cast: Movie[],
+  cast: Movie[];
 }

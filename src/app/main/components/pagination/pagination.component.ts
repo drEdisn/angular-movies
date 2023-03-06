@@ -4,6 +4,7 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { PaginationService } from 'src/app/main/services/pagination.service';
+import { TabPath } from '../../enums/api.enum';
 
 @Component({
   selector: 'app-pagination',
@@ -16,7 +17,6 @@ export class PaginationComponent implements OnDestroy {
   public currentPage$: Observable<number> =
     this.paginationService.getCurrentPage();
   private destroy$: Subject<void> = new Subject<void>();
-  
 
   constructor(
     private paginationService: PaginationService,
@@ -25,7 +25,24 @@ export class PaginationComponent implements OnDestroy {
   ) {}
 
   public changePage(page: number): void {
-    this.paginationService.setCurrentPage(page);
+    this.paginationService.setPages(page);
+
+    if (this.moviesService.getCurrentTabValue() === TabPath.search) {
+      this.getSearchMoviePage(page);
+    } else {
+      this.getPopularMoviePage(page);
+    }
+  }
+
+  private getSearchMoviePage(page: number): void {
+    this.apiService.requestSearchMovie(this.moviesService.searchValue, page)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((movies: MoviesSearchResult) => {
+        this.moviesService.setMovies(movies.results);
+      });
+  }
+
+  private getPopularMoviePage(page: number): void {
     this.apiService.requestTabMovie(this.moviesService.getCurrentTabValue(), page)
       .pipe(takeUntil(this.destroy$))
       .subscribe((movies: MoviesSearchResult) => {

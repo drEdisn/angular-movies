@@ -1,8 +1,10 @@
+<app-loader></app-loader>
+
 <div class="actor-page container" *ngIf="person !== null">
   <div class="page-content">
     <img [src]="profilePath" alt="actor" class="actor__image" />
     <div class="actor__about">
-      <h4 class="actor__title">Actor Name</h4>
+      <h4 class="actor__title">{{ person.name }}</h4>
       <div class="subcontent">
         <span class="seciton-name">Birthday:</span>
         <div class="actor__birthday">
@@ -18,13 +20,24 @@
         <p class="actor__biography">{{ person.biography }}</p>
       </div>
       <div class="subcontent actor__images">
-        <span class="actor__subtitle">Photos</span>
+        <div class="images__head">
+          <span class="actor__subtitle">Photos</span>
+          <button
+            mat-stroked-button
+            class="show-button"
+            appShow
+            elementClass=".images__block"
+          >
+            Show all
+          </button>
+        </div>
         <div class="images__block">
           <img
             *ngFor="let image of images$ | async"
-            [src]=""
+            [src]="imagePrePath + image.filePath"
             alt="actor"
             class="images__item"
+            (click)="openImage(image.filePath)"
           />
         </div>
       </div>
@@ -40,3 +53,5 @@
     </div>
   </div>
 </div>
+
+<app-image-popup *ngIf="popupService.isOpen | async"></app-image-popup>

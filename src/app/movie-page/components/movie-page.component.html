@@ -1,3 +1,5 @@
+<app-loader></app-loader>
+
 <div class="movie container" *ngIf="movie !== null">
   <div class="page-content">
     <div class="movie__image-content">
@@ -43,12 +45,21 @@
       <div class="movie__actors">
         <div class="actors__head">
           <span class="movie__subtitle">Top Billed Cast</span>
-          <button mat-stroked-button class="actors__show-button" appShow>
+          <button
+            mat-stroked-button
+            class="show-button"
+            appShow
+            elementClass=".actors__cards"
+          >
             Show all
           </button>
         </div>
         <div class="actors__cards">
-          <app-actor-card [routerLink]="['/actor', actor.id]" *ngFor="let actor of (credits$ | async)" [actor]="actor"></app-actor-card>
+          <app-actor-card
+            [routerLink]="['/actor', actor.id]"
+            *ngFor="let actor of credits$ | async"
+            [actor]="actor"
+          ></app-actor-card>
         </div>
       </div>
       <div class="movie__images">
@@ -56,11 +67,11 @@
         <div class="images__block">
           <img
             class="images__item"
-            *ngFor="let image of (images$ | async)"
+            *ngFor="let image of images$ | async"
             [src]="getImageUrl(image.filePath)"
             [alt]="image.filePath"
             (click)="openPopup(image.filePath)"
-          >
+          />
         </div>
       </div>
     </div>
@@ -68,7 +79,10 @@
   <div class="page-movie page-content">
     <span class="movie__subtitle page-movie__title">RECOMMENDATIONS</span>
     <div class="page-movie__content">
-      <app-movie-item *ngFor="let movie of (recommends$ | async)" [movieItem]="movie"></app-movie-item>
+      <app-movie-item
+        *ngFor="let movie of recommends$ | async"
+        [movieItem]="movie"
+      ></app-movie-item>
     </div>
   </div>
 </div>

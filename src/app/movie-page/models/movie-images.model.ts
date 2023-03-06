@@ -1,22 +1,22 @@
 export interface MovieImagePostersApi {
-  file_path: string,
-  height: number,
-  iso_639_1: null | string,
-  vote_average: number,
-  vote_count: number,
-  width: number,
+  file_path: string;
+  height: number;
+  iso_639_1: null | string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
 }
 
 export interface MovieImagePosters {
-  filePath: string,
+  filePath: string;
 }
 
 export interface MovieImagesApi {
-  id: number,
-  backdrops: MovieImagePostersApi[],
-  posters: MovieImagePostersApi[],
+  id: number;
+  backdrops: MovieImagePostersApi[];
+  posters: MovieImagePostersApi[];
 }
 
 export interface MovieImages {
-  backdrops: MovieImagePosters[],
+  backdrops: MovieImagePosters[];
 }

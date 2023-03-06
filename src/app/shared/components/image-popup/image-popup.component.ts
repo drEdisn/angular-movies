@@ -1,4 +1,4 @@
-import { PopupService } from './../../services/popup.service';
+import { PopupService } from 'src/app/shared/services/popup.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -8,10 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImagePopupComponent {
-
-  constructor(
-    public popupService: PopupService,
-  ) {}
+  constructor(public popupService: PopupService) {}
 
   public closePopup(): void {
     this.popupService.close();

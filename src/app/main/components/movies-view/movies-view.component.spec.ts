@@ -18,13 +18,7 @@ describe('MoviesViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [
-        HttpClient,
-        HttpHandler,
-        MoviesService,
-        PaginationService,
-        ApiService,
-      ],
+      providers: [HttpClient, HttpHandler, MoviesService, PaginationService, ApiService],
       declarations: [MoviesViewComponent, PaginationComponent],
     }).compileComponents();
 
@@ -51,7 +45,7 @@ describe('MoviesViewComponent', () => {
       return of(testGenresMock);
     });
 
-    const movies = spyOn(apiService, 'requestPopularMovie').and.callFake(() => {
+    const movies = spyOn(apiService, 'requestTabMovie').and.callFake(() => {
       return of(testMoviesMock);
     });
 
@@ -66,7 +60,7 @@ describe('MoviesViewComponent', () => {
 
   it('check sercions', () => {
     const elem = fixture.debugElement.queryAll(By.css('.sections__item'));
-    const sections = ['Popular', 'Top-Rated', 'Upcoming'];
+    const sections = ['Popular', 'Top Rated', 'Upcoming'];
 
     elem.forEach((obj, ind) => {
       expect(obj.nativeElement.innerText).toEqual(sections[ind]);

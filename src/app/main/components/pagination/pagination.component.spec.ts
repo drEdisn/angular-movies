@@ -1,8 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginationService } from 'src/app/main/services/pagination.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginationComponent } from './pagination.component';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 const chechCurrent = (current: Observable<number>, expectValue: number) => {
   current
@@ -20,7 +22,8 @@ describe('PaginationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PaginationComponent],
-      providers: [PaginationService],
+      imports: [HttpClientModule],
+      providers: [PaginationService, ApiService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PaginationComponent);

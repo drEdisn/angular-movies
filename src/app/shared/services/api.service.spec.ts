@@ -5,7 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { convertMovieApiToMovie, setMovies } from 'src/app/main/models/converters/convertMovieApiToMovie';
+import {
+  convertMovieApiToMovie,
+  setMovies,
+} from 'src/app/main/models/converters/convertMovieApiToMovie';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -33,11 +36,11 @@ describe('ApiService', () => {
   });
 
   it('check popular', () => {
-    const movies = spyOn(service, 'requestPopularMovie').and.callFake(() => {
+    const movies = spyOn(service, 'requestTabMovie').and.callFake(() => {
       return of(testMoviesMock);
     });
 
-    service.requestPopularMovie().subscribe((movie) => {
+    service.requestTabMovie().subscribe((movie) => {
       expect(movie).toEqual(testMoviesMock);
     });
     expect(movies).toHaveBeenCalled();

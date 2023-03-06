@@ -1,10 +1,10 @@
 .actor {
   &__image {
     background-color: var(--dark-3);
-    width: 250px;
-    height: 350px;
+    min-width: 260px;
+    max-width: 280px;
+    max-height: 390px;
     object-fit: contain;
-    padding: 1rem;
     border-radius: 5px;
   }
 
@@ -48,12 +48,19 @@
 }
 
 .images {
-  &__block {
-    width: 100%;
+
+  &__head {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+  }
+
+  &__block {
+    width: calc((120px + 0.95rem) * 6);
+    display: flex;
     gap: 1rem;
-    height: 170px;
+    overflow: hidden;
   }
 
   &__item {
@@ -61,10 +68,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 120px;
+    height: 180px;
     border-radius: 5px;
-    padding: 1rem;
     object-fit: contain;
   }
 }

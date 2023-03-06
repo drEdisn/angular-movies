@@ -24,4 +24,5 @@ export enum TabPath {
   popular = 'popular',
   topRated = 'top_rated',
   upcoming = 'upcoming',
+  search = 'search/movie',
 }

@@ -1,17 +1,18 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appShow]'
+  selector: '[appShow]',
 })
 export class ShowDirective {
-
   private element = this.el.nativeElement;
-  
-  constructor(private el: ElementRef<HTMLElement>) { }
+
+  @Input() elementClass: string = '';
+
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   @HostListener('click')
-  showAll() {
-    const cards = document.querySelector('.actors__cards') as HTMLElement;
+  public showAll(): void {
+    const cards = document.querySelector(this.elementClass) as HTMLElement;
     cards.classList.toggle('show');
 
     if (cards.classList.contains('show')) {

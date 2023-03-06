@@ -10,9 +10,7 @@ const ROUTES: Routes = [
   {
     path: ':id',
     loadChildren: () =>
-      import('src/app/movie-page/movie-page.module').then(
-        (m) => m.MoviePageModule,
-      ),
+      import('src/app/movie-page/movie-page.module').then((m) => m.MoviePageModule),
   },
 ];
 

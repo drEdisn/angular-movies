@@ -1,6 +1,12 @@
-import { PopupService } from './../services/popup.service';
+import { PopupService } from 'src/app/shared/services/popup.service';
 import { MoviesService } from 'src/app/main/services/movies.service';
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { BehaviorSubject, takeUntil, Subject } from 'rxjs';
 import { Movie } from 'src/app/main/models/movie.model';
 import { MovieImagePosters, MovieImages } from './../models/movie-images.model';
@@ -12,6 +18,7 @@ import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { MovieCredits } from '../models/movie-credits.model';
 import { Genres } from 'src/app/main/models/genres.model';
 import { ActivatedRoute } from '@angular/router';
+import { getImageUrl } from 'src/app/functions/check-image';
 
 @Component({
   selector: 'app-movie-page',
@@ -21,9 +28,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MoviePageComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  public recommends$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
-  public credits$: BehaviorSubject<MovieCast[]> = new BehaviorSubject<MovieCast[]>([]);
-  public images$: BehaviorSubject<MovieImagePosters[]> = new BehaviorSubject<MovieImagePosters[]>([]);
+  public recommends$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>(
+    [],
+  );
+  public credits$: BehaviorSubject<MovieCast[]> = new BehaviorSubject<
+    MovieCast[]
+  >([]);
+  public images$: BehaviorSubject<MovieImagePosters[]> = new BehaviorSubject<
+    MovieImagePosters[]
+  >([]);
   public movie: MovieFullInfo | null = null;
   public moviePosterPath: string = '';
   private id: number = 0;
@@ -41,14 +54,11 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   public getImageUrl(path: string | null, isMovie = false): string {
-    if (path) {
-      return ImageUrls.imageUrl + path;
-    }
     if (isMovie) {
-      return ImageUrls.define + ImageUrls.emptyMovieImage;
+      return getImageUrl(path, ImageUrls.emptyMovieImage);
     }
 
-    return ImageUrls.define + ImageUrls.emptyImage;
+    return getImageUrl(path, ImageUrls.emptyImage);
   }
 
   public openPopup(path: string) {
@@ -73,11 +83,12 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   public setGenres(): void {
     this.apiService.getGanres().subscribe((genres: Genres) => {
       this.moviesService.genres.push(...genres.genres);
-    })
+    });
   }
 
   private setMovie(): void {
-    this.apiService.getMovie(this.id)
+    this.apiService
+      .getMovie(this.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieFullInfo) => {
         this.movie = result;
@@ -87,7 +98,8 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   private setRecommends(): void {
-    this.apiService.getMovieRecommends(this.id)
+    this.apiService
+      .getMovieRecommends(this.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MoviesSearchResult) => {
         this.recommends$.next(result.results);
@@ -95,7 +107,8 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   private setCredits(): void {
-    this.apiService.getMovieCredits(this.id)
+    this.apiService
+      .getMovieCredits(this.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieCredits) => {
         this.credits$.next(result.cast);
@@ -103,10 +116,12 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   private setImages(): void {
-    this.apiService.getMovieImages(this.id)
+    this.apiService
+      .getMovieImages(this.id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieImages) => {
-        this.images$.next(result.backdrops.splice(0, 8));
+        const countOfImages: number = 8;
+        this.images$.next(result.backdrops.splice(0, countOfImages));
       });
   }
 

@@ -2,13 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { Genre } from 'src/app/main/models/genres.model';
 import { Movie } from 'src/app/main/models/movie.model';
-import {
-  Component,
-  Input,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnChanges,
-} from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 
 @Component({

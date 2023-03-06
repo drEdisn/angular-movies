@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
 import { MovieCast } from 'src/app/movie-page/models/movie-cast.model';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
+import { getImageUrl } from 'src/app/functions/check-image';
 
 @Component({
   selector: 'app-actor-card',
@@ -18,10 +19,6 @@ export class ActorCardComponent implements OnInit {
   }
 
   private setActorImage(): string {
-    if (this.actor?.profile_path) {
-      return ImageUrls.imageUrl + this.actor?.profile_path;
-    }
-
-    return ImageUrls.define + ImageUrls.emptyActor;
+    return getImageUrl(this.actor?.profile_path, ImageUrls.emptyActor);
   }
 }

@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PopupService {
   public isOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -10,7 +10,7 @@ export class PopupService {
 
   public open(src: string): void {
     this.isOpen.next(true);
-    this.imageSrc.next(src); 
+    this.imageSrc.next(src);
   }
 
   public close(): void {

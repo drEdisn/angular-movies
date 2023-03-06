@@ -1,5 +1,8 @@
-import { PersonImagesResultApi } from './../../actor-page/models/person-images-result';
-import { Person, PersonApi } from './../../actor-page/models/person.model';
+import {
+  PersonImagesResult,
+  PersonImagesResultApi,
+} from 'src/app/actor-page/models/person-images-result';
+import { Person, PersonApi } from 'src/app/actor-page/models/person.model';
 import { PersonCredits, PersonCreditsApi } from 'src/app/actor-page/models/person-credits.model';
 import { Observable, map } from 'rxjs';
 import { SearchResultAPI } from 'src/app/main/models/search-result.model';
@@ -17,6 +20,7 @@ import { convertFulMovieInfoToMovie } from 'src/app/movie-page/models/converters
 import { convertImagesApiToImages } from 'src/app/movie-page/models/converters/convertImagesApiToImages';
 import { convertPersonCreditsToMovie } from 'src/app/actor-page/models/converters/convertPersonCreditsToMovie';
 import { convertPersonApiToPerson } from 'src/app/actor-page/models/converters/convertPersonApiToPerson';
+import { convertPersonImageApiToImage } from 'src/app/actor-page/models/converters/convertPersonImageApiToImage';
 
 @Injectable({
   providedIn: 'root',
@@ -24,19 +28,22 @@ import { convertPersonApiToPerson } from 'src/app/actor-page/models/converters/c
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  public requestTabMovie(tab: TabPath = TabPath.popular, page: number = 1): Observable<MoviesSearchResult> {
-    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${tab}?page=${page}`)
-      .pipe(map((res: SearchResultAPI) => {
-        return convertApiResultToResult(res);
-      }));
-  }
-
-  public requestSearchMovie(
-    query: string,
+  public requestTabMovie(
+    tab: TabPath = TabPath.popular,
     page: number = 1,
   ): Observable<MoviesSearchResult> {
-    return this.http.get<MoviesSearchResult>(
-      `${Api.seatchMovie}?query=${query}&page=${page}`,
+    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${tab}?page=${page}`).pipe(
+      map((res: SearchResultAPI) => {
+        return convertApiResultToResult(res);
+      }),
+    );
+  }
+
+  public requestSearchMovie(query: string, page: number = 1): Observable<MoviesSearchResult> {
+    return this.http.get<SearchResultAPI>(`${Api.seatchMovie}?query=${query}&page=${page}`).pipe(
+      map((res: SearchResultAPI) => {
+        return convertApiResultToResult(res);
+      }),
     );
   }
 
@@ -45,17 +52,19 @@ export class ApiService {
   }
 
   public getMovie(id: number): Observable<MovieFullInfo> {
-    return this.http.get<MovieFullInfoApi>(`${MovieApi.movie}${id}`)
-      .pipe(map((movie: MovieFullInfoApi) => {
+    return this.http.get<MovieFullInfoApi>(`${MovieApi.movie}${id}`).pipe(
+      map((movie: MovieFullInfoApi) => {
         return convertFulMovieInfoToMovie(movie);
-      }));
+      }),
+    );
   }
 
   public getMovieImages(id: number): Observable<MovieImages> {
-    return this.http.get<MovieImagesApi>(`${MovieApi.movie}${id}${MovieApi.images}`)
-      .pipe(map((images: MovieImagesApi) => {
+    return this.http.get<MovieImagesApi>(`${MovieApi.movie}${id}${MovieApi.images}`).pipe(
+      map((images: MovieImagesApi) => {
         return convertImagesApiToImages(images);
-      }));
+      }),
+    );
   }
 
   public getMovieCredits(id: number): Observable<MovieCredits> {
@@ -63,27 +72,34 @@ export class ApiService {
   }
 
   public getMovieRecommends(id: number): Observable<MoviesSearchResult> {
-    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${id}${MovieApi.recommends}`)
-      .pipe(map((res: SearchResultAPI) => {
+    return this.http.get<SearchResultAPI>(`${MovieApi.movie}${id}${MovieApi.recommends}`).pipe(
+      map((res: SearchResultAPI) => {
         return convertApiResultToResult(res);
-      }));
+      }),
+    );
   }
 
   public getPersonCredits(id: number): Observable<PersonCredits> {
-    return this.http.get<PersonCreditsApi>(`${PeopleApi.person}${id}${PeopleApi.credits}`)
-      .pipe(map((credits: PersonCreditsApi) => {
+    return this.http.get<PersonCreditsApi>(`${PeopleApi.person}${id}${PeopleApi.credits}`).pipe(
+      map((credits: PersonCreditsApi) => {
         return convertPersonCreditsToMovie(credits);
-      }));
+      }),
+    );
   }
 
   public getPersonInfo(id: number): Observable<Person> {
-    return this.http.get<PersonApi>(`${PeopleApi.person}${id}`)
-      .pipe(map((person: PersonApi) => {
+    return this.http.get<PersonApi>(`${PeopleApi.person}${id}`).pipe(
+      map((person: PersonApi) => {
         return convertPersonApiToPerson(person);
-      }));
+      }),
+    );
   }
 
-  public getPersonImages(id: number): Observable<PersonImagesResultApi> {
-    return this.http.get<PersonImagesResultApi>(`${PeopleApi.person}${id}${PeopleApi.images}`);
+  public getPersonImages(id: number): Observable<PersonImagesResult> {
+    return this.http.get<PersonImagesResultApi>(`${PeopleApi.person}${id}${PeopleApi.images}`).pipe(
+      map((images: PersonImagesResultApi) => {
+        return convertPersonImageApiToImage(images);
+      }),
+    );
   }
 }

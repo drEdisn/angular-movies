@@ -1,4 +1,4 @@
-import { testMoviesMock, testGenresMock } from 'src/assets/mock/testData.mock';
+import { resultMoviesMock, genresMock } from 'src/assets/mock/resultMovies.mock';
 import { By } from '@angular/platform-browser';
 import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
 import { of } from 'rxjs';
@@ -52,11 +52,11 @@ describe('MoviesViewComponent', () => {
 
   it('check init', () => {
     const genres = spyOn(apiService, 'getGanres').and.callFake(() => {
-      return of(testGenresMock);
+      return of(genresMock);
     });
 
     const movies = spyOn(apiService, 'requestTabMovie').and.callFake(() => {
-      return of(testMoviesMock);
+      return of(resultMoviesMock);
     });
 
     component.ngOnInit();
@@ -80,7 +80,7 @@ describe('MoviesViewComponent', () => {
   it('change tab active', () => {
     const change = spyOn(moviesService, 'setCurrentTab');
     const tab = spyOn(apiService, 'requestTabMovie').and.callFake(() => {
-      return of(testMoviesMock);
+      return of(resultMoviesMock);
     });
 
     component.changeTab(TabPath.search);
@@ -91,7 +91,7 @@ describe('MoviesViewComponent', () => {
 
   it('check movieService values', () => {
     spyOn(apiService, 'requestTabMovie').and.callFake(() => {
-      return of(testMoviesMock);
+      return of(resultMoviesMock);
     });
 
     component.changeTab(TabPath.search);
@@ -100,7 +100,7 @@ describe('MoviesViewComponent', () => {
       expect(val).toEqual(TabPath.search);
     });
     moviesService.getMovies().subscribe((val) => {
-      expect(val).toEqual(testMoviesMock.results);
+      expect(val).toEqual(resultMoviesMock.results);
     });
   });
 });

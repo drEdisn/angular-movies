@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { getImageUrl } from 'src/app/functions/check-image';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { of } from 'rxjs';
-import { testGenresMock } from 'src/assets/mock/testData.mock';
+import { genresMock } from 'src/assets/mock/resultMovies.mock';
 
 describe('ActorPageComponent', () => {
   let component: ActorPageComponent;
@@ -49,7 +49,7 @@ describe('ActorPageComponent', () => {
     };
 
     const genres = spyOn(service, 'getGanres').and.callFake(() => {
-      return of(testGenresMock);
+      return of(genresMock);
     });
 
     const spyPerson = spyOn(service, 'getPersonInfo').and.callFake(() => {

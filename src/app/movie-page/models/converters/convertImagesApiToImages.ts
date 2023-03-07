@@ -3,7 +3,7 @@ import {
   MovieImagesApi,
   MovieImagePosters,
   MovieImagePostersApi,
-} from './../movie-images.model';
+} from 'src/app/movie-page/models/movie-images.model';
 
 export function convertImagesApiToImages(images: MovieImagesApi): MovieImages {
   const backdrops: MovieImagePosters[] = images.backdrops.map(

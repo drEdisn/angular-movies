@@ -1,4 +1,4 @@
-import { testMoviesMock } from 'src/assets/mock/testData.mock';
+import { resultMoviesMock } from 'src/assets/mock/resultMovies.mock';
 import { of } from 'rxjs';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { PaginationService } from 'src/app/main/services/pagination.service';
@@ -57,7 +57,7 @@ describe('HeaderComponent', () => {
     const setTotal = spyOn(paginationService, 'setTotalPages');
     const setPages = spyOn(paginationService, 'setPages');
     const search = spyOn(apiService, 'requestSearchMovie').and.callFake(() => {
-      return of(testMoviesMock);
+      return of(resultMoviesMock);
     });
 
     component.searchForm.setValue({ searchValue: 'asdf' });
@@ -77,7 +77,7 @@ describe('HeaderComponent', () => {
     const setTotal = spyOn(paginationService, 'setTotalPages');
     const setPages = spyOn(paginationService, 'setPages');
     const popular = spyOn(apiService, 'requestTabMovie').and.callFake(() => {
-      return of(testMoviesMock);
+      return of(resultMoviesMock);
     });
 
     component.searchForm.setValue({ searchValue: '' });

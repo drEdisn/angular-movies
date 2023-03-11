@@ -19,6 +19,7 @@ import { MovieCredits } from '../models/movie-credits.model';
 import { Genres } from 'src/app/main/models/genres.model';
 import { ActivatedRoute } from '@angular/router';
 import { getImageUrl } from 'src/app/functions/check-image';
+import { checkForZero } from 'src/app/functions/check-for-zero';
 
 @Component({
   selector: 'app-movie-page',
@@ -71,7 +72,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
 
   private init(): void {
     this.setId();
-    if (this.moviesService.genres.length === 0) {
+    if (checkForZero(this.moviesService.genres.length)) {
       this.setGenres();
     }
     this.setMovie();

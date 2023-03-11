@@ -20,6 +20,7 @@ import { Subject, takeUntil, BehaviorSubject } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import { Genres } from 'src/app/main/models/genres.model';
 import { getImageUrl } from 'src/app/functions/check-image';
+import { checkForZero } from 'src/app/functions/check-for-zero';
 
 @Component({
   selector: 'app-components',
@@ -53,7 +54,7 @@ export class ActorPageComponent implements OnInit, OnDestroy {
   private init(): void {
     this.actorId = this.router.snapshot.params['id'];
 
-    if (this.moviesService.genres.length === 0) {
+    if (checkForZero(this.moviesService.genres.length)) {
       this.setGenres();
     }
     this.apiService
@@ -77,9 +78,11 @@ export class ActorPageComponent implements OnInit, OnDestroy {
   }
 
   private setGenres(): void {
-    this.apiService.getGanres().subscribe((genresResult: Genres) => {
-      this.moviesService.genres = genresResult.genres;
-    });
+    this.apiService.getGanres()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((genresResult: Genres) => {
+        this.moviesService.genres = genresResult.genres;
+      });
   }
 
   private setPersonImages(): void {

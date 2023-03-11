@@ -1,6 +1,6 @@
 <app-loader></app-loader>
 
-<div class="movie container" *ngIf="movie !== null">
+<div class="movie container" *ngIf="movie">
   <div class="page-content">
     <div class="movie__image-content">
       <img [src]="moviePosterPath" [alt]="movie.title" class="movie__image" />

@@ -2,7 +2,14 @@ import { perosonCreditsMock, perosonCreditsMockApi } from 'src/assets/mock/perso
 import { personImageMock, personImageMockApi } from 'src/assets/mock/personImage.mock';
 import { personMockApi, personMock } from 'src/assets/mock/person.mock';
 import { movieImagesMockApi, movieImagesMock } from 'src/assets/mock/movieImages.mock';
-import * as converts from 'src/assets/mock/index-converters';
+import {
+  convertApiResultToResult,
+  convertFulMovieInfoToMovie,
+  convertImagesApiToImages,
+  convertPersonApiToPerson,
+  convertPersonCreditsToMovie,
+  convertPersonImageApiToImage,
+} from 'src/assets/mock/index-converters';
 import { resultMoviesApiMock, resultMoviesMock, genresMock } from 'src/assets/mock/resultMovies.mock';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
@@ -51,7 +58,7 @@ describe('ApiService', () => {
   });
 
   it('check converter', () => {
-    const newMock = converts.convertApiResultToResult(resultMoviesApiMock);
+    const newMock = convertApiResultToResult(resultMoviesApiMock);
 
     expect(newMock).toEqual(resultMoviesMock);
 
@@ -67,22 +74,22 @@ describe('ApiService', () => {
   });
 
   it('check converters', () => {
-    const movie = converts.convertApiResultToResult(resultMoviesApiMock);
+    const movie = convertApiResultToResult(resultMoviesApiMock);
     expect(movie).toEqual(resultMoviesMock);
 
-    const fullmovie = converts.convertFulMovieInfoToMovie(fullMovieMockApi);
+    const fullmovie = convertFulMovieInfoToMovie(fullMovieMockApi);
     expect(fullmovie).toEqual(fullMovieMock);
 
-    const images = converts.convertImagesApiToImages(movieImagesMockApi);
+    const images = convertImagesApiToImages(movieImagesMockApi);
     expect(images).toEqual(movieImagesMock);
 
-    const person = converts.convertPersonApiToPerson(personMockApi);
+    const person = convertPersonApiToPerson(personMockApi);
     expect(person).toEqual(personMock);
 
-    const personCredits = converts.convertPersonCreditsToMovie(perosonCreditsMockApi);
+    const personCredits = convertPersonCreditsToMovie(perosonCreditsMockApi);
     expect(personCredits).toEqual(perosonCreditsMock);
 
-    const personImages = converts.convertPersonImageApiToImage(personImageMockApi);
+    const personImages = convertPersonImageApiToImage(personImageMockApi);
     expect(personImages).toEqual(personImageMock);
   });
 });

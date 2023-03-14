@@ -1,11 +1,25 @@
-import { convertApiResultToResult } from 'src/app/main/models/converters/convertApiResultToResult';
-import { testMoviesApiMock } from 'src/assets/mock/testData.mock';
-import { testMoviesMock, testGenresMock } from 'src/assets/mock/testData.mock';
+import { perosonCreditsMock, perosonCreditsMockApi } from 'src/assets/mock/personCredits.mock';
+import { personImageMock, personImageMockApi } from 'src/assets/mock/personImage.mock';
+import { personMockApi, personMock } from 'src/assets/mock/person.mock';
+import { movieImagesMockApi, movieImagesMock } from 'src/assets/mock/movieImages.mock';
+import {
+  convertApiResultToResult,
+  convertFulMovieInfoToMovie,
+  convertImagesApiToImages,
+  convertPersonApiToPerson,
+  convertPersonCreditsToMovie,
+  convertPersonImageApiToImage,
+} from 'src/assets/mock/index-converters';
+import { resultMoviesApiMock, resultMoviesMock, genresMock } from 'src/assets/mock/resultMovies.mock';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { convertMovieApiToMovie, setMovies } from 'src/app/main/models/converters/convertMovieApiToMovie';
+import {
+  convertMovieApiToMovie,
+  setMovies,
+} from 'src/app/main/models/converters/convertMovieApiToMovie';
+import { fullMovieMock, fullMovieMockApi } from 'src/assets/mock/fullMovie.mock';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -23,39 +37,59 @@ describe('ApiService', () => {
 
   it('check genres', () => {
     const genres = spyOn(service, 'getGanres').and.callFake(() => {
-      return of(testGenresMock);
+      return of(genresMock);
     });
 
     service.getGanres().subscribe((genre) => {
-      expect(genre).toEqual(testGenresMock);
+      expect(genre).toEqual(genresMock);
     });
     expect(genres).toHaveBeenCalled();
   });
 
   it('check popular', () => {
-    const movies = spyOn(service, 'requestPopularMovie').and.callFake(() => {
-      return of(testMoviesMock);
+    const movies = spyOn(service, 'requestTabMovie').and.callFake(() => {
+      return of(resultMoviesMock);
     });
 
-    service.requestPopularMovie().subscribe((movie) => {
-      expect(movie).toEqual(testMoviesMock);
+    service.requestTabMovie().subscribe((movie) => {
+      expect(movie).toEqual(resultMoviesMock);
     });
     expect(movies).toHaveBeenCalled();
   });
 
   it('check converter', () => {
-    const newMock = convertApiResultToResult(testMoviesApiMock);
+    const newMock = convertApiResultToResult(resultMoviesApiMock);
 
-    expect(newMock).toEqual(testMoviesMock);
+    expect(newMock).toEqual(resultMoviesMock);
 
-    const movieMock = convertMovieApiToMovie(testMoviesApiMock.results[0]);
+    const movieMock = convertMovieApiToMovie(resultMoviesApiMock.results[0]);
 
-    expect(movieMock).toEqual(testMoviesMock.results[0]);
+    expect(movieMock).toEqual(resultMoviesMock.results[0]);
 
-    const movies = testMoviesApiMock.results;
+    const movies = resultMoviesApiMock.results;
 
-    expect(setMovies(movies)).toEqual(testMoviesMock.results);
+    expect(setMovies(movies)).toEqual(resultMoviesMock.results);
 
     expect(setMovies()).toEqual([]);
+  });
+
+  it('check converters', () => {
+    const movie = convertApiResultToResult(resultMoviesApiMock);
+    expect(movie).toEqual(resultMoviesMock);
+
+    const fullmovie = convertFulMovieInfoToMovie(fullMovieMockApi);
+    expect(fullmovie).toEqual(fullMovieMock);
+
+    const images = convertImagesApiToImages(movieImagesMockApi);
+    expect(images).toEqual(movieImagesMock);
+
+    const person = convertPersonApiToPerson(personMockApi);
+    expect(person).toEqual(personMock);
+
+    const personCredits = convertPersonCreditsToMovie(perosonCreditsMockApi);
+    expect(personCredits).toEqual(perosonCreditsMock);
+
+    const personImages = convertPersonImageApiToImage(personImageMockApi);
+    expect(personImages).toEqual(personImageMock);
   });
 });

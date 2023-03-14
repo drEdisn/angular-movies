@@ -1,10 +1,10 @@
-button.mat-mdc-outlined-button:not(:disabled) {
+button.show-button.mat-mdc-outlined-button:not(:disabled) {
   height: 30px;
   color: var(--white);
   border: 2px solid var(--white);
 }
 
-div.mat-mdc-form-field-subscript-wrapper.ng-tns-c70-0 {
+div.mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
   &::before {
     content: none;
   }

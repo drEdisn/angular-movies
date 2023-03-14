@@ -1,5 +1,5 @@
-<div class="actor">
-  <img src="assets/images/person-icon.png" alt="actor" class="actor__image" />
-  <h5 class="actor__name">Actor Name</h5>
-  <p class="actor__character">Played character</p>
+<div class="actor" *ngIf="actor">
+  <img [src]="actorImagePath" alt="actor" class="actor__image" />
+  <h5 class="actor__name">{{ actor.name }}</h5>
+  <p class="actor__character">{{ actor.character }}</p>
 </div>

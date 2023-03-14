@@ -1,3 +1,4 @@
+import { LocalStore } from './../enums/localStore.enum';
 import { Pages } from 'src/app/main/models/pagination.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -7,12 +8,25 @@ import { PaginationConst } from '../enums/pagination.enum';
   providedIn: 'root',
 })
 export class PaginationService {
-  public pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([1]);
-  public currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  private pages$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([
+    1,
+  ]);
+  private currentPage$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    this.getLocalPage(),
+  );
   public totalPages: number = PaginationConst.max;
 
   public getCurrentPage(): Observable<number> {
     return this.currentPage$.asObservable();
+  }
+
+  public setLocalPage(page: number): void {
+    localStorage.setItem(LocalStore.page, `${page}`);
+  }
+
+  public getLocalPage(): number {
+    const page: number = Number(localStorage.getItem(LocalStore.page));
+    return page || 1;
   }
 
   public getPages(): Observable<number[]> {
@@ -29,12 +43,12 @@ export class PaginationService {
 
     this.pages$.next(pages);
     this.currentPage$.next(page || PaginationConst.min);
+    this.setLocalPage(page);
   }
 
   public setTotalPages(value: number): void {
-    if (this.totalPages > value) {
-      this.totalPages = value;
-    }
+    this.totalPages =
+      value <= PaginationConst.max ? value : PaginationConst.max;
   }
 
   private getMaxMinPages(page: number): Pages {
@@ -43,11 +57,17 @@ export class PaginationService {
       minPage: page - PaginationConst.two,
     };
 
+    if (this.totalPages <= PaginationConst.quantityPages) {
+      pages.maxPage = this.totalPages;
+      pages.minPage = PaginationConst.min;
+      return pages;
+    }
+
     if (page <= PaginationConst.three) {
       pages.maxPage = PaginationConst.quantityPages;
       pages.minPage = PaginationConst.min;
     }
-    if (page >= PaginationConst.premax) {
+    if (page >= this.totalPages - PaginationConst.three) {
       pages.maxPage = this.totalPages;
       pages.minPage = this.totalPages - PaginationConst.four;
     }

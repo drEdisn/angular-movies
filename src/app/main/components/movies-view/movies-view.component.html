@@ -1,17 +1,32 @@
+<app-loader></app-loader>
+
 <main class="main">
   <div class="container main__container">
     <div class="sections">
-      <div class="sections__item" *ngFor="let section of sections">
-        {{ section }}
+      <div
+        class="sections__item"
+        *ngFor="let section of sections"
+        [ngClass]="(currentTab$ | async) === section.tab ? '_active' : ''"
+        (click)="changeTab(section.tab)"
+      >
+        {{ section.name }}
       </div>
     </div>
-    <div class="movies">
-      <app-movie-item
-        *ngFor="let movie of movies$ | async"
-        [movieItem]="movie"
-        [routerLink]="['/movies', movie.id]"
-      ></app-movie-item>
+    <div class="movies" *ngIf="(movies$ | async)?.length !== 0; else nomovie">
+      <div class="movies__items">
+        <app-movie-item
+          *ngFor="let movie of movies$ | async"
+          [movieItem]="movie"
+          [routerLink]="['/movies', movie.id]"
+        ></app-movie-item>
+      </div>
+      <app-pagination></app-pagination>
     </div>
-    <app-pagination></app-pagination>
   </div>
 </main>
+
+<ng-template #nomovie>
+  <div class="movies no-movies">
+    <h3 class="movies__not-found">Movies Not Found</h3>
+  </div>
+</ng-template>

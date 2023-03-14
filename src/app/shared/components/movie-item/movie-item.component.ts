@@ -45,6 +45,6 @@ export class MovieItemComponent implements OnInit, OnChanges {
       return ImageUrls.imageUrl + this.movieItem.posterPath;
     }
 
-    return ImageUrls.define + ImageUrls.emptyImage;
+    return ImageUrls.define + ImageUrls.emptyMovieImage;
   }
 }

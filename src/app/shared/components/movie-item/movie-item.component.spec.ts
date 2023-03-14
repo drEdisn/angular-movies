@@ -28,7 +28,6 @@ describe('MovieItemComponent', () => {
     component.ngOnInit();
     component.ngOnChanges();
 
-    
     expect(changes).toHaveBeenCalled();
     expect(init).toHaveBeenCalled();
     expect(component).toBeTruthy();
@@ -45,11 +44,15 @@ describe('MovieItemComponent', () => {
 
   it('check image', () => {
     component.ngOnChanges();
-    expect(component.posterPath).toEqual('./assets/images/empty-movie-icon.png');
+    expect(component.posterPath).toEqual(
+      './assets/images/empty-movie-icon.png',
+    );
 
     component.movieItem = movieArrayMock[0];
     component.ngOnChanges();
 
-    expect(component.posterPath).toEqual('https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg');
-  })
+    expect(component.posterPath).toEqual(
+      'https://image.tmdb.org/t/p/original/sv1xJUazXeYqALzczSZ3O6nkH75.jpg',
+    );
+  });
 });

@@ -17,17 +17,8 @@ export interface MovieAPI {
 
 export interface Movie {
   posterPath: string | null;
-  adult: boolean;
-  overview: string;
-  releaseDate: string;
-  originalTitle: string;
   genreIds: number[];
   id: number;
-  originalLanguage: string;
   title: string;
-  backdropPath: string | null;
-  popularity: number;
-  voteCount: number;
-  video: boolean;
   voteAverage: number;
 }

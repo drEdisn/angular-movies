@@ -3,9 +3,16 @@ import { Genres } from 'src/app/main/models/genres.model';
 import { PaginationService } from 'src/app/main/services/pagination.service';
 import { Movie } from 'src/app/main/models/movie.model';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Subject, switchMap, takeUntil, Observable } from 'rxjs';
 import { MoviesService } from 'src/app/main/services/movies.service';
+import { TabPath } from 'src/app/main/enums/api.enum';
+import { Section } from 'src/app/main/models/section.model';
 
 @Component({
   selector: 'app-movies-view',
@@ -15,12 +22,17 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 })
 export class MoviesViewComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  public movies$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
-  public sections: string[] = ['Popular', 'Top-Rated', 'Upcoming'];
+  public movies$: Observable<Movie[]> = this.moviesService.getMovies();
+  public currentTab$: Observable<TabPath> = this.moviesService.getCurrentTab();
+  public sections: Section[] = [
+    { name: 'Popular', tab: TabPath.popular },
+    { name: 'Top Rated', tab: TabPath.topRated },
+    { name: 'Upcoming', tab: TabPath.upcoming },
+  ];
 
   constructor(
     private apiService: ApiService,
-    private moviesService: MoviesService,
+    public moviesService: MoviesService,
     private paginationService: PaginationService,
   ) {}
 
@@ -29,19 +41,37 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   }
 
   private init(): void {
-    this.apiService.getGanres()
+    this.apiService
+      .getGanres()
       .pipe(
         takeUntil(this.destroy$),
         switchMap((genres: Genres) => {
-          this.moviesService.genres.push(...genres.genres);
-          return this.apiService.requestPopularMovie();
+          this.moviesService.genres = genres.genres;
+          return this.apiService.requestTabMovie(
+            this.moviesService.getCurrentTabValue(),
+            this.paginationService.getLocalPage(),
+          );
         }),
       )
-      .subscribe((result: MoviesSearchResult) => {
-        this.movies$.next(result.results);
-        this.paginationService.setTotalPages(result.totalPages);
-        this.paginationService.setPages(result.page);
+      .subscribe((movies: MoviesSearchResult) => {
+        this.setMoviesAndPagination(movies);
       });
+  }
+
+  public changeTab(tab: TabPath): void {
+    this.moviesService.setCurrentTab(tab);
+    this.apiService
+      .requestTabMovie(tab)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((movies: MoviesSearchResult) => {
+        this.setMoviesAndPagination(movies);
+      });
+  }
+
+  private setMoviesAndPagination(result: MoviesSearchResult): void {
+    this.moviesService.setMovies(result.results);
+    this.paginationService.setTotalPages(result.totalPages);
+    this.paginationService.setPages(result.page);
   }
 
   public ngOnDestroy(): void {

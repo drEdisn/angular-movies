@@ -4,6 +4,5 @@ export enum PaginationConst {
   three,
   four,
   quantityPages,
-  premax = 497,
   max = 500,
 }

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,6 +14,7 @@ import { ImagePopupComponent } from './components/image-popup/image-popup.compon
 import { ShowDirective } from './directives/show.directive';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { VoteAverageDirective } from './directives/vote-average.directive';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ImagePopupComponent,
     ShowDirective,
     LoaderComponent,
+    VoteAverageDirective,
   ],
   imports: [
     CommonModule,
+    RouterModule,
     TranslateModule,
     MatFormFieldModule,
     MatInputModule,

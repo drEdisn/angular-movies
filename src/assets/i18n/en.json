@@ -1,4 +1,27 @@
 {
   "title": "TITLE",
-  "placeholder": "Movies, person movie theaters"
+  "placeholder": "Movies, person movie theaters",
+  "not-found": "Page not found",
+  "actor-page": {
+    "birthday": "Birthday:",
+    "place-of-bitrh": "Place of bitrh:",
+    "biography": "Biography:",
+    "photos": "Photos",
+    "known-by": "KNOWN BY"
+  },
+  "movie-page": {
+    "title": "Title:",
+    "overview": "Overview:",
+    "release-date": "Release date:",
+    "revenue": "Revenue:",
+    "duration": "Duration:",
+    "top-cast": "Top Billed Cast",
+    "images": "Images",
+    "recommendations": "RECOMMENDATIONS"
+  },
+  "main": {
+    "popular": "Popular",
+    "top-rated": "Top Rated",
+    "upcoming": "Upcoming"
+  }
 }

@@ -1,6 +1,6 @@
 <header class="header">
   <div class="container header__container">
-    <h1 class="header__title">
+    <h1 class="header__title" routerLink="/movies">
       {{ 'title' | translate }}
     </h1>
     <form
@@ -18,8 +18,8 @@
       </mat-form-field>
     </form>
     <div class="header__lang">
-      <div class="header__lang-select">EN</div>
-      <div class="header__lang-change">
+      <div class="header__lang-select">{{ (currentLangValue | async) | uppercase }}</div>
+      <div class="header__lang-change" (click)="changeLanguage($event)">
         <div class="header__lang-option" data-value="en">EN</div>
         <div class="header__lang-option" data-value="ru">RU</div>
       </div>

@@ -9,7 +9,7 @@
         [ngClass]="(currentTab$ | async) === section.tab ? '_active' : ''"
         (click)="changeTab(section.tab)"
       >
-        {{ section.name }}
+        {{ section.name | translate }}
       </div>
     </div>
     <div class="movies" *ngIf="(movies$ | async)?.length !== 0; else nomovie">

@@ -6,7 +6,7 @@ const ROUTES: Routes = [
   {
     path: '',
     component: MoviePageComponent,
-  },
+  }
 ];
 
 @NgModule({

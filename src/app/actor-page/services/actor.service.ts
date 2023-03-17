@@ -1,3 +1,4 @@
+import { LocalStore } from 'src/app/main/enums/localStore.enum';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -17,10 +18,10 @@ export class ActorService {
   }
 
   private getLocalActors(): number[] {
-    return JSON.parse(localStorage.getItem('actorIds') || '[]');
+    return JSON.parse(localStorage.getItem(LocalStore.actorIds) || '[]');
   }
 
   private setLocalActors(value: number[]): void {
-    localStorage.setItem('actorIds', JSON.stringify(value));
+    localStorage.setItem(LocalStore.actorIds, JSON.stringify(value));
   }
 }

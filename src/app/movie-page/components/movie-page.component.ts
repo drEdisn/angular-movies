@@ -96,7 +96,6 @@ export class MoviePageComponent implements OnInit, OnDestroy {
     this.setGenres();
     this.setMovie();
     this.setCredits();
-    this.setImages();
     this.setRecommends();
   }
 

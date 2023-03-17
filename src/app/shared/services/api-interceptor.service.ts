@@ -9,12 +9,14 @@ import {
 import { finalize, Observable } from 'rxjs';
 import { Api } from 'src/app/main/enums/api.enum';
 import { LoaderService } from './loader.service';
-import { LanguagesApi } from 'src/app/main/enums/lang.enum';
+import { Lang, LanguagesApi } from 'src/app/main/enums/lang.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiInterceptorService implements HttpInterceptor {
+  private lastLanguage: Lang = this.languageService.getLangValue();
+
   constructor(
     private loaderService: LoaderService,
     private languageService: LanguageService,
@@ -24,11 +26,9 @@ export class ApiInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const assetsReg: RegExp = new RegExp('./assets');
-    const language = this.languageService.getLangValue();
-
     this.loaderService.openLoader();
 
+    const assetsReg: RegExp = new RegExp('./assets');
     if (assetsReg.test(req.url)) {
       return next.handle(req).pipe(
         finalize(() => {
@@ -37,28 +37,28 @@ export class ApiInterceptorService implements HttpInterceptor {
       );
     }
 
-    req.params.set('api_key', Api.api_key);
-    let newRequest;
-    if (!req.url.endsWith('/images')) {
-      newRequest = req.clone({
-        url: `${Api.url}${req.url}`,
-        setParams: {
-          'api_key': Api.api_key,
-          'language': LanguagesApi[language]
-        }
-      })
-    } else {
-      newRequest = req.clone({
-        url: `${Api.url}${req.url}`,
-        params: req.params.set('api_key', Api.api_key)
-      })
-    }
-
-
+    const newRequest = this.setNewRequest(req);
     return next.handle(newRequest).pipe(
       finalize(() => {
         this.loaderService.closeLoader();
       }),
     );
+  }
+
+  private setNewRequest(req: HttpRequest<any>) {
+    this.lastLanguage = this.languageService.getLangValue();
+    if (!req.url.endsWith('/images')) {
+      return req.clone({
+        url: `${Api.url}${req.url}`,
+        setParams: {
+          'api_key': Api.api_key,
+          'language': LanguagesApi[this.lastLanguage]
+        }
+      })
+    }
+    return req.clone({
+      url: `${Api.url}${req.url}`,
+      params: req.params.set('api_key', Api.api_key)
+    })
   }
 }

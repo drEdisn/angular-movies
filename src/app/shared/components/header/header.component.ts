@@ -62,8 +62,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
   }
 
   private getSearchMovie(requestQuery: string): void {
-    this.moviesService.setCurrentTab(TabPath.search);
-    this.moviesService.searchValue = requestQuery;
+    this.setRequestSetting(TabPath.search, requestQuery);
 
     this.apiService
       .requestSearchMovie(requestQuery)
@@ -74,14 +73,19 @@ export class HeaderComponent implements OnDestroy, OnInit {
   }
 
   private getPopularMovie(): void {
-    this.moviesService.setCurrentTab(TabPath.popular);
-
+    this.setRequestSetting(TabPath.popular);
+  
     this.apiService
       .requestTabMovie(TabPath.popular)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MoviesSearchResult) => {
         this.setMoviesAndPagination(result);
       });
+  }
+
+  private setRequestSetting(path: TabPath, requestQuery: string = ''): void {
+    this.moviesService.setCurrentTab(path);
+    this.moviesService.searchValue = requestQuery;
   }
 
   private setMoviesAndPagination(result: MoviesSearchResult): void {

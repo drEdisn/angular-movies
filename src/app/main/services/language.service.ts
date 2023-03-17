@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Lang } from '../enums/lang.enum';
+import { LocalStore } from '../enums/localStore.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -22,10 +23,10 @@ export class LanguageService {
   }
 
   private setLocalLang(value: Lang): void {
-    localStorage.setItem('lang', value);
+    localStorage.setItem(LocalStore.lang, value);
   }
 
   private getLocalLang(): Lang {
-    return (localStorage.getItem('lang') as Lang) || Lang.en;
+    return (localStorage.getItem(LocalStore.lang) as Lang) || Lang.en;
   }
 }

@@ -67,7 +67,6 @@ export class ActorPageComponent implements OnInit, OnDestroy {
   private getAllRequests(): void {
     this.setGenres();
     this.getPersonInfo();
-    this.setPersonImages();
     this.setPersonCredits();
   }
 

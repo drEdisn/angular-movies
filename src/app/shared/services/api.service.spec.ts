@@ -1,7 +1,16 @@
-import { perosonCreditsMock, perosonCreditsMockApi } from 'src/assets/mock/personCredits.mock';
-import { personImageMock, personImageMockApi } from 'src/assets/mock/personImage.mock';
+import {
+  perosonCreditsMock,
+  perosonCreditsMockApi,
+} from 'src/assets/mock/personCredits.mock';
+import {
+  personImageMock,
+  personImageMockApi,
+} from 'src/assets/mock/personImage.mock';
 import { personMockApi, personMock } from 'src/assets/mock/person.mock';
-import { movieImagesMockApi, movieImagesMock } from 'src/assets/mock/movieImages.mock';
+import {
+  movieImagesMockApi,
+  movieImagesMock,
+} from 'src/assets/mock/movieImages.mock';
 import {
   convertApiResultToResult,
   convertFulMovieInfoToMovie,
@@ -10,7 +19,11 @@ import {
   convertPersonCreditsToMovie,
   convertPersonImageApiToImage,
 } from 'src/assets/mock/index-converters';
-import { resultMoviesApiMock, resultMoviesMock, genresMock } from 'src/assets/mock/resultMovies.mock';
+import {
+  resultMoviesApiMock,
+  resultMoviesMock,
+  genresMock,
+} from 'src/assets/mock/resultMovies.mock';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { TestBed } from '@angular/core/testing';
@@ -19,7 +32,10 @@ import {
   convertMovieApiToMovie,
   setMovies,
 } from 'src/app/main/models/converters/convertMovieApiToMovie';
-import { fullMovieMock, fullMovieMockApi } from 'src/assets/mock/fullMovie.mock';
+import {
+  fullMovieMock,
+  fullMovieMockApi,
+} from 'src/assets/mock/fullMovie.mock';
 
 describe('ApiService', () => {
   let service: ApiService;

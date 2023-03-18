@@ -101,7 +101,8 @@ export class ActorPageComponent implements OnInit, OnDestroy {
   }
 
   private setGenres(): void {
-    this.apiService.getGanres()
+    this.apiService
+      .getGanres()
       .pipe(takeUntil(this.destroy$))
       .subscribe((genresResult: Genres) => {
         this.moviesService.genres = genresResult.genres;

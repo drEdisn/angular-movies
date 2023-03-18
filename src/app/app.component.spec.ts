@@ -12,6 +12,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { createTranslateLoader } from './app.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -24,6 +25,7 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
         SharedModule,
         RouterModule,
+        RouterTestingModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

@@ -110,11 +110,12 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   public setGenres(): void {
-    this.apiService.getGanres()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((genres: Genres) => {
-      this.moviesService.genres.push(...genres.genres);
-    });
+    this.apiService
+      .getGanres()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((genres: Genres) => {
+        this.moviesService.genres.push(...genres.genres);
+      });
   }
 
   private setMovie(): void {
@@ -143,7 +144,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieCredits) => {
         this.credits$.next(result.cast);
-        this.actorService.setActorIds(result.cast.map(value => value.id));
+        this.actorService.setActorIds(result.cast.map((value) => value.id));
       });
   }
 

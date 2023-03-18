@@ -25,7 +25,7 @@ const ROUTES: Routes = [
       import(
         'src/app/shared/components/page-not-found/page-not-found.component'
       ).then((m) => m.PageNotFoundComponent),
-  }
+  },
 ];
 
 @NgModule({

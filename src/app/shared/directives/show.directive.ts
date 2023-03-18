@@ -1,5 +1,12 @@
 import { Lang } from 'src/app/main/enums/lang.enum';
-import { Directive, ElementRef, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { ButtonLangs } from 'src/app/actor-page/models/button-lang.movel';
 
 @Directive({
@@ -15,15 +22,13 @@ export class ShowDirective implements OnInit, OnChanges {
     ru: {
       show: 'Показать все',
       hide: 'Скрыть',
-    }
-  }
+    },
+  };
 
   @Input() elementClass: string = '';
   @Input() currentLang: string | null = Lang.en;
 
-  constructor(
-    private el: ElementRef<HTMLElement>,
-  ) {}
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   public ngOnInit(): void {
     this.showAll(true);
@@ -39,7 +44,8 @@ export class ShowDirective implements OnInit, OnChanges {
     if (!isChange) {
       cards.classList.toggle('show');
     }
-    const lang: keyof ButtonLangs = (this.currentLang || Lang.en) as keyof ButtonLangs;
+    const lang: keyof ButtonLangs = (this.currentLang ||
+      Lang.en) as keyof ButtonLangs;
 
     if (cards.classList.contains('show')) {
       this.element.textContent = this.lang[lang].hide;

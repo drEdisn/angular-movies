@@ -1,4 +1,7 @@
-import { MovieImages, MovieImagesApi } from 'src/app/movie-page/models/movie-images.model';
+import {
+  MovieImages,
+  MovieImagesApi,
+} from 'src/app/movie-page/models/movie-images.model';
 
 export const movieImagesMockApi: MovieImagesApi = {
   id: 123412,

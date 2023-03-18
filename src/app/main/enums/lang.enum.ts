@@ -1,9 +1,9 @@
 export enum Lang {
   en = 'en',
-  ru = 'ru'
-};
+  ru = 'ru',
+}
 
 export enum LanguagesApi {
   ru = 'ru-RU',
   en = 'en-US',
-};
+}

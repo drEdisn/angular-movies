@@ -2,15 +2,13 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { Vote } from 'src/app/main/enums/vote.enum';
 
 @Directive({
-  selector: '[appVoteAverage]'
+  selector: '[appVoteAverage]',
 })
 export class VoteAverageDirective implements OnInit {
   private element: HTMLElement = this.el.nativeElement;
   @Input() voteAverage: number = 0;
 
-  constructor(
-    private el: ElementRef<HTMLElement>,
-  ) { }
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   public ngOnInit(): void {
     this.setVoteColor();
@@ -29,5 +27,4 @@ export class VoteAverageDirective implements OnInit {
 
     this.element.style.backgroundColor = color;
   }
-
 }

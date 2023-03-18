@@ -18,7 +18,9 @@
       </mat-form-field>
     </form>
     <div class="header__lang">
-      <div class="header__lang-select">{{ (currentLangValue | async) | uppercase }}</div>
+      <div class="header__lang-select">
+        {{ currentLangValue | async | uppercase }}
+      </div>
       <div class="header__lang-change" (click)="changeLanguage($event)">
         <div class="header__lang-option" data-value="en">EN</div>
         <div class="header__lang-option" data-value="ru">RU</div>

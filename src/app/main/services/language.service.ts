@@ -7,7 +7,9 @@ import { LocalStore } from '../enums/localStore.enum';
   providedIn: 'root',
 })
 export class LanguageService {
-  private language$: BehaviorSubject<Lang> = new BehaviorSubject<Lang>(this.getLocalLang());
+  private language$: BehaviorSubject<Lang> = new BehaviorSubject<Lang>(
+    this.getLocalLang(),
+  );
 
   public getLangValue(): Lang {
     return this.language$.getValue();

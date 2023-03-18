@@ -1,4 +1,7 @@
-import { resultMoviesMock, genresMock } from 'src/assets/mock/resultMovies.mock';
+import {
+  resultMoviesMock,
+  genresMock,
+} from 'src/assets/mock/resultMovies.mock';
 import { By } from '@angular/platform-browser';
 import { movieArrayMock } from 'src/assets/mock/movieArray.mock';
 import { of } from 'rxjs';
@@ -12,6 +15,12 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 import { MoviesViewComponent } from './movies-view.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TabPath } from 'src/app/main/enums/api.enum';
+import {
+  TranslateFakeLoader,
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 describe('MoviesViewComponent', () => {
   let component: MoviesViewComponent;
@@ -27,9 +36,18 @@ describe('MoviesViewComponent', () => {
         MoviesService,
         PaginationService,
         ApiService,
+        TranslateService,
       ],
       declarations: [MoviesViewComponent, PaginationComponent],
-      imports: [SharedModule],
+      imports: [
+        SharedModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateFakeLoader,
+          },
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MoviesViewComponent);
@@ -70,7 +88,7 @@ describe('MoviesViewComponent', () => {
 
   it('check sercions', () => {
     const elem = fixture.debugElement.queryAll(By.css('.sections__item'));
-    const sections = ['Popular', 'Top Rated', 'Upcoming'];
+    const sections = ['main.popular', 'main.top-rated', 'main.upcoming'];
 
     elem.forEach((obj, ind) => {
       expect(obj.nativeElement.innerText).toEqual(sections[ind]);

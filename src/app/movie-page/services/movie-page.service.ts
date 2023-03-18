@@ -6,7 +6,9 @@ import { Movie } from 'src/app/main/models/movie.model';
   providedIn: 'root',
 })
 export class MoviePageService {
-  private recommends$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
+  private recommends$: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>(
+    [],
+  );
 
   public getRecommendsValue(): Movie[] {
     return this.recommends$.getValue();

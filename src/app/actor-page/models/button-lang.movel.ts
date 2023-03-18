@@ -1,9 +1,9 @@
 export interface ButtonLang {
-  show: string,
-  hide: string,
+  show: string;
+  hide: string;
 }
 
 export interface ButtonLangs {
-  en: ButtonLang,
-  ru: ButtonLang,
+  en: ButtonLang;
+  ru: ButtonLang;
 }

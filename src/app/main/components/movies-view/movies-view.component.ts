@@ -48,14 +48,18 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         if (this.moviesService.searchValue) {
-          this.apiService.getGanres()
+          this.apiService
+            .getGanres()
             .pipe(takeUntil(this.destroy$))
-            .subscribe((genres) => this.moviesService.genres = genres.genres);
-          this.getSearchMovie(this.moviesService.searchValue);
+            .subscribe((genres) => (this.moviesService.genres = genres.genres));
+          this.getSearchMovie(
+            this.moviesService.searchValue,
+            this.paginationService.getLocalPage(),
+          );
         } else {
           this.init();
         }
-      })
+      });
   }
 
   private init(): void {
@@ -76,12 +80,12 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getSearchMovie(requestQuery: string): void {
+  private getSearchMovie(requestQuery: string, page: number): void {
     this.moviesService.setCurrentTab(TabPath.search);
     this.moviesService.searchValue = requestQuery;
 
     this.apiService
-      .requestSearchMovie(requestQuery)
+      .requestSearchMovie(requestQuery, page)
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MoviesSearchResult) => {
         this.setMoviesAndPagination(result);
@@ -91,7 +95,7 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
   public changeTab(tab: TabPath): void {
     this.moviesService.setCurrentTab(tab);
     this.moviesService.searchValue = '';
-  
+
     this.apiService
       .requestTabMovie(tab)
       .pipe(takeUntil(this.destroy$))

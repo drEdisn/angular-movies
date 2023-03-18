@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ActorService {
-  private actorIds$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(this.getLocalActors());
+  private actorIds$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(
+    this.getLocalActors(),
+  );
 
   public getActorIds(): number[] {
     return this.actorIds$.getValue();

@@ -33,7 +33,7 @@ export class ApiInterceptorService implements HttpInterceptor {
       return next.handle(req).pipe(
         finalize(() => {
           this.loaderService.closeLoader();
-        })
+        }),
       );
     }
 
@@ -51,14 +51,14 @@ export class ApiInterceptorService implements HttpInterceptor {
       return req.clone({
         url: `${Api.url}${req.url}`,
         setParams: {
-          'api_key': Api.api_key,
-          'language': LanguagesApi[this.lastLanguage]
-        }
-      })
+          api_key: Api.api_key,
+          language: LanguagesApi[this.lastLanguage],
+        },
+      });
     }
     return req.clone({
       url: `${Api.url}${req.url}`,
-      params: req.params.set('api_key', Api.api_key)
-    })
+      params: req.params.set('api_key', Api.api_key),
+    });
   }
 }

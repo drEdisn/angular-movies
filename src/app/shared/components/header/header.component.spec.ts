@@ -68,7 +68,7 @@ describe('HeaderComponent', () => {
     expect(setTotal).toHaveBeenCalled();
     expect(setMovies).toHaveBeenCalled();
     expect(setPages).toHaveBeenCalled();
-    expect(moviesService.searchValue).toEqual('asdf');
+    expect(moviesService.getSearchValue()).toEqual('asdf');
   });
 
   it('search 2 way', () => {

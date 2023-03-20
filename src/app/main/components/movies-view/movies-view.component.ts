@@ -45,21 +45,30 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
 
   private getTranslateLangChange(): void {
     this.translateService.onLangChange
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        if (this.moviesService.searchValue) {
-          this.apiService
-            .getGanres()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((genres) => (this.moviesService.genres = genres.genres));
-          this.getSearchMovie(
-            this.moviesService.searchValue,
-            this.paginationService.getLocalPage(),
-          );
-        } else {
-          this.init();
-        }
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap(() => this.apiService.getGanres()),
+        switchMap((genres: Genres) => {
+          this.moviesService.genres = genres.genres;
+          return this.getReturnValue(this.moviesService.getSearchValue());
+        })
+      )
+      .subscribe((result: MoviesSearchResult) => {
+        this.setMoviesAndPagination(result);
       });
+  }
+
+  private getReturnValue(searchValue: string): Observable<MoviesSearchResult> {
+    if (searchValue) {
+      return this.apiService.requestSearchMovie(
+        searchValue,
+        this.paginationService.getLocalPage(),
+      );
+    }
+    return this.apiService.requestTabMovie(
+      this.moviesService.getCurrentTabValue(),
+      this.paginationService.getLocalPage(),
+    );
   }
 
   private init(): void {
@@ -80,21 +89,8 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getSearchMovie(requestQuery: string, page: number): void {
-    this.moviesService.setCurrentTab(TabPath.search);
-    this.moviesService.searchValue = requestQuery;
-
-    this.apiService
-      .requestSearchMovie(requestQuery, page)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result: MoviesSearchResult) => {
-        this.setMoviesAndPagination(result);
-      });
-  }
-
   public changeTab(tab: TabPath): void {
-    this.moviesService.setCurrentTab(tab);
-    this.moviesService.searchValue = '';
+    this.setMovieServiceValues(tab, '');
 
     this.apiService
       .requestTabMovie(tab)
@@ -102,6 +98,11 @@ export class MoviesViewComponent implements OnInit, OnDestroy {
       .subscribe((movies: MoviesSearchResult) => {
         this.setMoviesAndPagination(movies);
       });
+  }
+
+  private setMovieServiceValues(tab: TabPath, value: string): void {
+    this.moviesService.setCurrentTab(tab);
+    this.moviesService.setSearchValue(value);
   }
 
   private setMoviesAndPagination(result: MoviesSearchResult): void {

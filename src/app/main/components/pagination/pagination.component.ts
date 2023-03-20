@@ -36,7 +36,7 @@ export class PaginationComponent implements OnDestroy {
 
   private getSearchMoviePage(page: number): void {
     this.apiService
-      .requestSearchMovie(this.moviesService.searchValue, page)
+      .requestSearchMovie(this.moviesService.getSearchValue(), page)
       .pipe(takeUntil(this.destroy$))
       .subscribe((movies: MoviesSearchResult) => {
         this.moviesService.setMovies(movies.results);

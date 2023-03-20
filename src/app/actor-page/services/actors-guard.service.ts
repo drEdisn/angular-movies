@@ -14,7 +14,7 @@ export class ActrosGuardService implements CanActivate {
   constructor(private actorService: ActorService, private route: Router) {}
 
   public canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
-    const actorId: number = +route.params['id'];
+    const actorId: number = Number(route.params['id']);
 
     return this.checkActor(actorId);
   }

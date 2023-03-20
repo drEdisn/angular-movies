@@ -16,7 +16,7 @@ export class MoviesService {
     this.getCurrentTabFromLocalStore(),
   );
   public genres: Genre[] = [];
-  public searchValue: string = '';
+  public searchValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private paginationService: PaginationService) {}
 
@@ -24,6 +24,14 @@ export class MoviesService {
     if (value !== TabPath.search) {
       localStorage.setItem(LocalStore.currentTab, value);
     }
+  }
+
+  public setSearchValue(value: string): void {
+    this.searchValue.next(value);
+  }
+
+  public getSearchValue(): string {
+    return this.searchValue.getValue();
   }
 
   private getCurrentTabFromLocalStore(): TabPath {

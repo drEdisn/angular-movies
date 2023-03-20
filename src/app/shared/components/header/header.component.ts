@@ -90,7 +90,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
 
   private setRequestSetting(path: TabPath, requestQuery: string = ''): void {
     this.moviesService.setCurrentTab(path);
-    this.moviesService.searchValue = requestQuery;
+    this.moviesService.setSearchValue(requestQuery);
   }
 
   private setMoviesAndPagination(result: MoviesSearchResult): void {

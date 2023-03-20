@@ -11,6 +11,12 @@ import { getImageUrl } from 'src/app/functions/check-image';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { of } from 'rxjs';
 import { genresMock } from 'src/assets/mock/resultMovies.mock';
+import {
+  TranslateFakeLoader,
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 describe('ActorPageComponent', () => {
   let component: ActorPageComponent;
@@ -21,7 +27,18 @@ describe('ActorPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ActorPageComponent],
-      imports: [SharedModule, HttpClientModule, RouterTestingModule],
+      imports: [
+        SharedModule,
+        HttpClientModule,
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateFakeLoader,
+          },
+        }),
+      ],
+      providers: [TranslateService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ActorPageComponent);

@@ -1,4 +1,7 @@
-import { MovieFullInfo, MovieFullInfoApi } from 'src/app/movie-page/models/movie-full-info.model';
+import {
+  MovieFullInfo,
+  MovieFullInfoApi,
+} from 'src/app/movie-page/models/movie-full-info.model';
 
 export function convertFulMovieInfoToMovie(
   movie: MovieFullInfoApi,

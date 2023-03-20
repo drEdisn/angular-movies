@@ -6,30 +6,41 @@
     <div class="actor__about">
       <h4 class="actor__title">{{ person.name }}</h4>
       <div class="subcontent">
-        <span class="seciton-name">Birthday:</span>
+        <span class="seciton-name">
+          {{ 'actor-page.birthday' | translate }}
+        </span>
         <div class="actor__birthday">
           {{ person.birthday | date : 'MMMM d, y' }}
         </div>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Place of bitrh:</span>
-        <div class="actor__place">{{ person.placeOfBirth }}</div>
+        <span class="seciton-name">
+          {{ 'actor-page.place-of-bitrh' | translate }}
+        </span>
+        <div class="actor__place">
+          {{ person.placeOfBirth }}
+        </div>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Biography:</span>
-        <p class="actor__biography">{{ person.biography }}</p>
+        <span class="seciton-name">
+          {{ 'actor-page.biography' | translate }}
+        </span>
+        <p class="actor__biography">
+          {{ person.biography }}
+        </p>
       </div>
       <div class="subcontent actor__images">
         <div class="images__head">
-          <span class="actor__subtitle">Photos</span>
+          <span class="actor__subtitle">
+            {{ 'actor-page.photos' | translate }}
+          </span>
           <button
             mat-stroked-button
             class="show-button"
             appShow
             elementClass=".images__block"
-          >
-            Show all
-          </button>
+            [currentLang]="languageService.getLang() | async"
+          ></button>
         </div>
         <div class="images__block">
           <img
@@ -44,11 +55,14 @@
     </div>
   </div>
   <div class="page-movie page-content actor__movies">
-    <span class="actor__subtitle page-movie__title">KNOWN BY</span>
+    <span class="actor__subtitle page-movie__title">
+      {{ 'actor-page.known-by' | translate }}
+    </span>
     <div class="page-movie__content">
       <app-movie-item
         *ngFor="let movie of credits$ | async"
         [movieItem]="movie"
+        [routerLink]="['/movies', movie.id]"
       ></app-movie-item>
     </div>
   </div>

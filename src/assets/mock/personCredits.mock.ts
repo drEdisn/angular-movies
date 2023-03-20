@@ -1,4 +1,7 @@
-import { PersonCredits, PersonCreditsApi } from 'src/app/actor-page/models/person-credits.model';
+import {
+  PersonCredits,
+  PersonCreditsApi,
+} from 'src/app/actor-page/models/person-credits.model';
 
 export const perosonCreditsMockApi: PersonCreditsApi = {
   cast: [],

@@ -10,29 +10,39 @@
     </div>
     <div class="movie__about">
       <div class="subcontent">
-        <span class="seciton-name">Title:</span>
+        <span class="seciton-name">
+          {{ 'movie-page.title' | translate }}
+        </span>
         <h4 class="movie__title">{{ movie.title }}</h4>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Overview:</span>
+        <span class="seciton-name">
+          {{ 'movie-page.overview' | translate }}
+        </span>
         <p class="movie__overview">
           {{ movie.overview }}
         </p>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Release date:</span>
+        <span class="seciton-name">
+          {{ 'movie-page.release-date' | translate }}
+        </span>
         <div class="movie__date">
           {{ movie.releaseDate | date : 'MMMM d, y' }}
         </div>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Revenue:</span>
+        <span class="seciton-name">
+          {{ 'movie-page.revenue' | translate }}
+        </span>
         <div class="movie__revenue">
           {{ movie.revenue | currency : 'CAD' : 'symbol-narrow' : '1.0-0' }}
         </div>
       </div>
       <div class="subcontent">
-        <span class="seciton-name">Duration:</span>
+        <span class="seciton-name">
+          {{ 'movie-page.duration' | translate }}
+        </span>
         <div class="movie__duration">
           {{ movie.runtime | number : '1.0-2' }}
         </div>
@@ -44,15 +54,16 @@
       </div>
       <div class="movie__actors">
         <div class="actors__head">
-          <span class="movie__subtitle">Top Billed Cast</span>
+          <span class="movie__subtitle">
+            {{ 'movie-page.top-cast' | translate }}
+          </span>
           <button
             mat-stroked-button
             class="show-button"
             appShow
             elementClass=".actors__cards"
-          >
-            Show all
-          </button>
+            [currentLang]="languageService.getLang() | async"
+          ></button>
         </div>
         <div class="actors__cards">
           <app-actor-card
@@ -63,7 +74,9 @@
         </div>
       </div>
       <div class="movie__images">
-        <span class="movie__subtitle">Images</span>
+        <span class="movie__subtitle">
+          {{ 'movie-page.images' | translate }}
+        </span>
         <div class="images__block">
           <img
             class="images__item"
@@ -77,11 +90,14 @@
     </div>
   </div>
   <div class="page-movie page-content">
-    <span class="movie__subtitle page-movie__title">RECOMMENDATIONS</span>
+    <span class="movie__subtitle page-movie__title">
+      {{ 'movie-page.recommendations' | translate }}
+    </span>
     <div class="page-movie__content">
       <app-movie-item
         *ngFor="let movie of recommends$ | async"
         [movieItem]="movie"
+        [routerLink]="['/movies', movie.id]"
       ></app-movie-item>
     </div>
   </div>

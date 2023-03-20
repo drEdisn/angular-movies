@@ -1,4 +1,27 @@
 {
-  "title": "ЗАГОЛОВОК",
-  "placeholder": "Кино, люди, кинотеатры"
+  "title": "КИНО",
+  "placeholder": "Кино, люди, кинотеатры",
+  "not-found": "Страница не найдена",
+  "actor-page": {
+    "birthday": "День рождения:",
+    "place-of-bitrh": "Место рождения:",
+    "biography": "Биография:",
+    "photos": "Фото",
+    "known-by": "ИЗВЕСТЕН ТАКЖЕ"
+  },
+  "movie-page": {
+    "title": "Заголовок:",
+    "overview": "Описание:",
+    "release-date": "Дата релиза:",
+    "revenue": "Доход:",
+    "duration": "Длительность:",
+    "top-cast": "Актерский состав",
+    "images": "Картинки",
+    "recommendations": "РЕКОМЕНДАЦИИ"
+  },
+  "main": {
+    "popular": "Популярное",
+    "top-rated": "Лучший рейтинг",
+    "upcoming": "Предстоящиe"
+  }
 }

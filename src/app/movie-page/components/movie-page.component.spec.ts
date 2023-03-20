@@ -5,6 +5,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MoviePageComponent } from './movie-page.component';
 import { ApiService } from 'src/app/shared/services/api.service';
+import {
+  TranslateFakeLoader,
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { getImageUrl } from 'src/app/functions/check-image';
+import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 
 describe('MoviePageComponent', () => {
   let component: MoviePageComponent;
@@ -13,8 +21,18 @@ describe('MoviePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MoviePageComponent, ActorCardComponent],
-      imports: [SharedModule, HttpClientModule, RouterTestingModule],
-      providers: [ApiService],
+      imports: [
+        SharedModule,
+        HttpClientModule,
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useClass: TranslateFakeLoader,
+          },
+        }),
+      ],
+      providers: [ApiService, TranslateService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MoviePageComponent);
@@ -24,5 +42,15 @@ describe('MoviePageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('check getImageUrl', () => {
+    expect(component.getImageUrl('')).toEqual(
+      getImageUrl('', ImageUrls.emptyImage),
+    );
+
+    expect(component.getImageUrl('', true)).toEqual(
+      getImageUrl('', ImageUrls.emptyMovieImage),
+    );
   });
 });

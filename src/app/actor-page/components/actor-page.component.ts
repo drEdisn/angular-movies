@@ -1,3 +1,4 @@
+import { LanguageService } from 'src/app/main/services/language.service';
 import { PopupService } from 'src/app/shared/services/popup.service';
 import { ImageUrls } from 'src/app/main/enums/image-urls.enum';
 import { PersonCredits } from 'src/app/actor-page/models/person-credits.model';
@@ -21,6 +22,7 @@ import { MoviesService } from 'src/app/main/services/movies.service';
 import { Genres } from 'src/app/main/models/genres.model';
 import { getImageUrl } from 'src/app/functions/check-image';
 import { checkForZero } from 'src/app/functions/check-for-zero';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-components',
@@ -45,10 +47,27 @@ export class ActorPageComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private moviesService: MoviesService,
     public popupService: PopupService,
+    public languageService: LanguageService,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
     this.init();
+    this.getTranslateLangChenge();
+  }
+
+  private getTranslateLangChenge(): void {
+    this.translateService.onLangChange
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getAllRequests();
+      });
+  }
+
+  private getAllRequests(): void {
+    this.setGenres();
+    this.getPersonInfo();
+    this.setPersonCredits();
   }
 
   private init(): void {
@@ -57,6 +76,13 @@ export class ActorPageComponent implements OnInit, OnDestroy {
     if (checkForZero(this.moviesService.genres.length)) {
       this.setGenres();
     }
+
+    this.getPersonInfo();
+    this.setPersonImages();
+    this.setPersonCredits();
+  }
+
+  private getPersonInfo(): void {
     this.apiService
       .getPersonInfo(this.actorId)
       .pipe(takeUntil(this.destroy$))
@@ -68,9 +94,6 @@ export class ActorPageComponent implements OnInit, OnDestroy {
         );
         this.cdr.detectChanges();
       });
-
-    this.setPersonImages();
-    this.setPersonCredits();
   }
 
   public openImage(path: string): void {
@@ -78,7 +101,8 @@ export class ActorPageComponent implements OnInit, OnDestroy {
   }
 
   private setGenres(): void {
-    this.apiService.getGanres()
+    this.apiService
+      .getGanres()
       .pipe(takeUntil(this.destroy$))
       .subscribe((genresResult: Genres) => {
         this.moviesService.genres = genresResult.genres;

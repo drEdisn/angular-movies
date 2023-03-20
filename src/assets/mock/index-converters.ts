@@ -12,4 +12,4 @@ export {
   convertImagesApiToImages,
   convertFulMovieInfoToMovie,
   convertApiResultToResult,
-}
+};

@@ -1,4 +1,8 @@
-import { PersonImageApi, PersonImagesResult, PersonImagesResultApi } from 'src/app/actor-page/models/person-images-result';
+import {
+  PersonImageApi,
+  PersonImagesResult,
+  PersonImagesResultApi,
+} from 'src/app/actor-page/models/person-images-result';
 
 export const personImageMockApi: PersonImagesResultApi = {
   id: 124,

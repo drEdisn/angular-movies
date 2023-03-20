@@ -1,3 +1,4 @@
+import { ActorService } from 'src/app/actor-page/services/actor.service';
 import { PopupService } from 'src/app/shared/services/popup.service';
 import { MoviesService } from 'src/app/main/services/movies.service';
 import {
@@ -17,9 +18,11 @@ import { MovieFullInfo } from '../models/movie-full-info.model';
 import { MoviesSearchResult } from 'src/app/main/models/search-result.model';
 import { MovieCredits } from '../models/movie-credits.model';
 import { Genres } from 'src/app/main/models/genres.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { getImageUrl } from 'src/app/functions/check-image';
 import { checkForZero } from 'src/app/functions/check-for-zero';
+import { LanguageService } from 'src/app/main/services/language.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movie-page',
@@ -40,7 +43,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   >([]);
   public movie: MovieFullInfo | null = null;
   public moviePosterPath: string = '';
-  private id: number = 0;
+  private id: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(
     private apiService: ApiService,
@@ -48,10 +51,22 @@ export class MoviePageComponent implements OnInit, OnDestroy {
     private moviesService: MoviesService,
     private router: ActivatedRoute,
     public popupService: PopupService,
+    private actorService: ActorService,
+    public languageService: LanguageService,
+    private translateService: TranslateService,
   ) {}
 
   public ngOnInit(): void {
-    this.init();
+    this.setId();
+    this.getTranslateLangChenge();
+  }
+
+  private getTranslateLangChenge(): void {
+    this.translateService.onLangChange
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getAllRequests();
+      });
   }
 
   public getImageUrl(path: string | null, isMovie = false): string {
@@ -67,11 +82,24 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   private setId(): void {
-    this.id = this.router.snapshot.params['id'];
+    this.router.params.subscribe((params: Params) => {
+      this.id.next(params['id']);
+      this.init();
+    });
+  }
+
+  private getId(): number {
+    return this.id.getValue();
+  }
+
+  private getAllRequests(): void {
+    this.setGenres();
+    this.setMovie();
+    this.setCredits();
+    this.setRecommends();
   }
 
   private init(): void {
-    this.setId();
     if (checkForZero(this.moviesService.genres.length)) {
       this.setGenres();
     }
@@ -82,14 +110,17 @@ export class MoviePageComponent implements OnInit, OnDestroy {
   }
 
   public setGenres(): void {
-    this.apiService.getGanres().subscribe((genres: Genres) => {
-      this.moviesService.genres.push(...genres.genres);
-    });
+    this.apiService
+      .getGanres()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((genres: Genres) => {
+        this.moviesService.genres.push(...genres.genres);
+      });
   }
 
   private setMovie(): void {
     this.apiService
-      .getMovie(this.id)
+      .getMovie(this.getId())
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieFullInfo) => {
         this.movie = result;
@@ -100,7 +131,7 @@ export class MoviePageComponent implements OnInit, OnDestroy {
 
   private setRecommends(): void {
     this.apiService
-      .getMovieRecommends(this.id)
+      .getMovieRecommends(this.getId())
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MoviesSearchResult) => {
         this.recommends$.next(result.results);
@@ -109,16 +140,17 @@ export class MoviePageComponent implements OnInit, OnDestroy {
 
   private setCredits(): void {
     this.apiService
-      .getMovieCredits(this.id)
+      .getMovieCredits(this.getId())
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieCredits) => {
         this.credits$.next(result.cast);
+        this.actorService.setActorIds(result.cast.map((value) => value.id));
       });
   }
 
   private setImages(): void {
     this.apiService
-      .getMovieImages(this.id)
+      .getMovieImages(this.getId())
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: MovieImages) => {
         const countOfImages: number = 8;
